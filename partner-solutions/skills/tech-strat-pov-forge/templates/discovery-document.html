@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>{{PARTNER_NAME}} — Discovery Document</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: 'Salesforce Sans', 'Helvetica Neue', Arial, sans-serif;
+    background: #f4f6f9;
+    color: #032d60;
+    font-size: 14px;
+    line-height: 1.5;
+  }
+  .page { max-width: 980px; margin: 0 auto; padding: 32px 24px; }
+
+  /* ── Header ── */
+  .header {
+    background: #032d60;
+    color: white;
+    padding: 28px 32px;
+    border-radius: 8px;
+    margin-bottom: 24px;
+  }
+  .header h1 { font-size: 1.5rem; font-weight: 700; margin-bottom: 8px; }
+  .header .meta { display: flex; flex-wrap: wrap; gap: 20px; font-size: 0.8rem; opacity: 0.8; }
+  .header .meta span { white-space: nowrap; }
+  .header .meta span::before { content: attr(data-label) ': '; font-weight: 700; opacity: 1; }
+  .header .doc-meta-line { margin-top: 10px; font-size: 0.8rem; opacity: 0.85; }
+  .header .doc-meta-line strong { font-weight: 700; opacity: 1; }
+
+  /* ── Discussion capture slot ── */
+  .discussion-capture {
+    margin-top: 12px;
+    border: 1.5px dashed #9db8d8;
+    border-radius: 6px;
+    background: #f7faff;
+    padding: 12px 14px;
+    color: #444444;
+    font-size: 13.5px;
+  }
+  .discussion-capture .dc-label {
+    font-weight: 700; color: #0176d3; text-transform: uppercase;
+    letter-spacing: 0.05em; font-size: 11px; display: block; margin-bottom: 6px;
+  }
+  .discussion-capture .dc-pending { font-style: italic; opacity: 0.7; }
+
+  /* ── Section card ── */
+  .section {
+    background: white;
+    border-radius: 8px;
+    padding: 24px;
+    margin-bottom: 20px;
+    border: 1px solid #e5e5e5;
+  }
+  .section-title {
+    font-size: 0.68rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: #444444;
+    margin-bottom: 18px;
+  }
+
+  /* Value Proposition Canvas — two panels */
+  .vpc { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+  .vpc-panel { border: 1px solid #e5e5e5; border-radius: 8px; padding: 16px; }
+  .vpc-panel h4 { font-size: 0.8rem; color: #0176d3; margin-bottom: 8px; }
+  .vpc-cell { margin-bottom: 12px; }
+  .vpc-cell .label { font-size: 0.65rem; font-weight: 700; text-transform: uppercase; color: #444444; }
+
+  /* Business Model Canvas — 9 blocks */
+  .bmc { display: grid; grid-template-columns: repeat(5, 1fr); grid-auto-rows: minmax(80px, auto); gap: 8px; }
+  .bmc-block { border: 1px solid #e5e5e5; border-radius: 6px; padding: 10px; background: #fff; }
+  .bmc-block .label { font-size: 0.62rem; font-weight: 700; text-transform: uppercase; color: #444444; margin-bottom: 6px; }
+  .bmc-kp { grid-row: span 2; }
+  .bmc-cs { grid-row: span 2; }
+  .bmc-cost { grid-column: span 2; }
+  .bmc-rev  { grid-column: span 3; }
+  .canvas-sub { font-size: 0.9rem; font-weight: 700; color: #032d60; margin: 4px 0 12px; }
+  .canvas-sub.second { margin-top: 28px; }
+
+  /* ── Dimensions ── */
+  .dimension { margin-bottom: 24px; border-bottom: 1px solid #e8edf5; padding-bottom: 20px; }
+  .dimension:last-child { border-bottom: none; margin-bottom: 0; padding-bottom: 0; }
+  .dimension h3 { font-size: 0.95rem; font-weight: 700; color: #032d60; margin-bottom: 10px; }
+  .dimension h4 { font-size: 0.75rem; font-weight: 700; color: #444444; text-transform: uppercase;
+                  letter-spacing: 0.05em; margin-top: 10px; margin-bottom: 4px; }
+  .theme-label {
+    font-size: 0.62rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em;
+    color: white; background: #0176d3; border-radius: 4px; padding: 2px 8px;
+    display: inline-block; margin-bottom: 14px;
+  }
+
+  /* ── Tables ── */
+  .styled-table {
+    width: 100%;
+    border-collapse: separate;
+    border-spacing: 0;
+    border: 1px solid #e5e5e5;
+    border-radius: 6px;
+    overflow: hidden;
+    font-size: 0.82rem;
+  }
+  .styled-table th {
+    background: #032d60;
+    color: white;
+    padding: 10px 12px;
+    text-align: left;
+    font-weight: 600;
+    font-size: 0.7rem;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+  }
+  .styled-table td {
+    padding: 10px 12px;
+    border-top: 1px solid #e8edf5;
+    vertical-align: top;
+  }
+  .styled-table tr:nth-child(even) td { background: #f8fafc; }
+
+  /* ── Confidence block ── */
+  .confidence-block {
+    background: #f0f5fc;
+    border-left: 3px solid #0176d3;
+    padding: 12px 16px;
+    border-radius: 0 6px 6px 0;
+    font-size: 0.82rem;
+    color: #444444;
+    margin-top: 14px;
+    line-height: 1.6;
+  }
+
+  /* ── Print ── */
+  @media print {
+    @page { margin: 1.5cm; size: A4 portrait; }
+    body { background: white; font-size: 12px; }
+    .section { break-inside: avoid; box-shadow: none; }
+    .header { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+  }
+</style>
+</head>
+<body>
+<!-- Home-page back-link. Fill the HOME_HREF token in the anchor below with {SLUG}-index.html when part of a package; remove this entire <a> line for a standalone artifact (no home page). The token is intentionally not repeated in this comment so a plain string-replace fills only the anchor. -->
+<a href="{{HOME_HREF}}" style="position:fixed;top:14px;left:14px;z-index:9999;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;font-size:12px;font-weight:700;letter-spacing:0.04em;text-decoration:none;color:#fff;background:#0176d3;padding:7px 14px;border-radius:100px;box-shadow:0 2px 8px rgba(0,0,0,0.25);">&#8592; All artifacts</a>
+<div class="page">
+
+  <!-- ── Header ── -->
+  <div class="header">
+    <h1>{{PARTNER_NAME}} — Discovery Document</h1>
+    <div class="meta">
+      <span data-label="Date">{{GENERATED_DATE}}</span>
+      <span data-label="Prepared by">{{PREPARED_BY}}</span>
+      <span data-label="Discovery Confidence">{{DISCOVERY_CONFIDENCE}}</span>
+      <span data-label="Associated POV">{{ASSOCIATED_POV}}</span>
+    </div>
+    <div class="doc-meta-line"><strong>Mode:</strong> {{MODE_STATUS}}</div>
+  </div>
+
+  <!-- ── Part I: Discovery Dimensions ── -->
+  <div class="section">
+    <div class="section-title">Part I — Discovery Dimensions</div>
+    <!-- Each dimension block rendered into the DIMENSIONS_HTML slot MUST end with a capture slot:
+     <div class="discussion-capture"><span class="dc-label">➕ Discussion capture</span>
+       <span class="dc-pending">Discussion capture: [pending] — add insights from the POV discussion</span>
+     </div>
+     In auto-capture mode the slot is pending; when captured, replace the dc-pending span with the noted insights. -->
+    {{DIMENSIONS_HTML}}
+  </div>
+
+  <!-- ── Part II: Synthesis Canvases (Value Proposition + Business Model) ── -->
+  <div class="section">
+    <div class="section-title">Part II — Synthesis Canvases</div>
+    <div class="canvas-sub">Value Proposition Canvas</div>
+    <div class="vpc">
+      <div class="vpc-panel"><h4>Customer Profile</h4>
+        <div class="vpc-cell"><div class="label">Jobs</div>{{VPC_JOBS}}</div>
+        <div class="vpc-cell"><div class="label">Pains</div>{{VPC_PAINS}}</div>
+        <div class="vpc-cell"><div class="label">Gains</div>{{VPC_GAINS}}</div>
+      </div>
+      <div class="vpc-panel"><h4>Value Map</h4>
+        <div class="vpc-cell"><div class="label">Products &amp; Services</div>{{VPC_PRODUCTS}}</div>
+        <div class="vpc-cell"><div class="label">Pain Relievers</div>{{VPC_RELIEVERS}}</div>
+        <div class="vpc-cell"><div class="label">Gain Creators</div>{{VPC_CREATORS}}</div>
+      </div>
+    </div>
+    <div class="canvas-sub second">Business Model Canvas</div>
+    <div class="bmc">
+      <div class="bmc-block bmc-kp"><div class="label">Key Partnerships</div>{{BMC_PARTNERSHIPS}}</div>
+      <div class="bmc-block"><div class="label">Key Activities</div>{{BMC_ACTIVITIES}}</div>
+      <div class="bmc-block bmc-cs" style="grid-column:3"><div class="label">Value Propositions</div>{{BMC_VALUE_PROPS}}</div>
+      <div class="bmc-block"><div class="label">Customer Relationships</div>{{BMC_RELATIONSHIPS}}</div>
+      <div class="bmc-block bmc-cs"><div class="label">Customer Segments</div>{{BMC_SEGMENTS}}</div>
+      <div class="bmc-block"><div class="label">Key Resources</div>{{BMC_RESOURCES}}</div>
+      <div class="bmc-block"><div class="label">Channels</div>{{BMC_CHANNELS}}</div>
+      <div class="bmc-block bmc-cost"><div class="label">Cost Structure</div>{{BMC_COSTS}}</div>
+      <div class="bmc-block bmc-rev"><div class="label">Revenue Streams</div>{{BMC_REVENUE}}</div>
+    </div>
+  </div>
+
+  <!-- ── Part III: Opportunity Backlog ── -->
+  <div class="section">
+    <div class="section-title">Part III — Opportunity Backlog</div>
+    {{BACKLOG_HTML}}
+  </div>
+
+  <!-- ── Part IV: POV Feed & Open Gaps ── -->
+  <div class="section">
+    <div class="section-title">Part IV — POV Feed &amp; Open Gaps</div>
+    {{POV_FEED_HTML}}
+    {{OPEN_GAPS_HTML}}
+  </div>
+
+  <!-- ── Confidence & Assumptions ── -->
+  <div class="section">
+    <div class="section-title">Confidence &amp; Assumptions</div>
+    <div class="confidence-block">{{CONFIDENCE_HTML}}</div>
+  </div>
+
+</div><!-- /page -->
+</body>
+</html>
+<!-- =====================================================================
+     TOKEN REFERENCE — every token used in this template
+     (names WITHOUT braces so each literal token name appears once in the file;
+      a plain string-replace must not double-fill a glossary copy — see
+      refs/html-output-method.md)
+     =====================================================================
+     Header
+       PARTNER_NAME          — partner / company name
+       GENERATED_DATE        — document generation date (YYYY-MM-DD)
+       PREPARED_BY           — name and role of preparer
+       DISCOVERY_CONFIDENCE  — confidence score 0.0–1.0
+       ASSOCIATED_POV        — link to the associated POV, or "none — standalone"
+       MODE_STATUS           — discovery mode + capture status line
+                                   (e.g. "Auto-capture · Discussion capture: pending")
+
+     Part I
+       DIMENSIONS_HTML       — rendered HTML for all 10 discovery dimensions
+                                   (variable-length; rebuilt by fill script)
+
+     Part II — Value Proposition Canvas
+       VPC_JOBS              — customer jobs (Theme A: Users & Journeys + Process Flows)
+       VPC_PAINS             — customer pains (Theme A: Pain & Friction Points)
+       VPC_GAINS             — customer gains (Theme A: Success Metrics & Outcomes)
+       VPC_PRODUCTS          — partner products & services mapped to jobs
+       VPC_RELIEVERS         — pain relievers the solution provides
+       VPC_CREATORS          — gain creators the solution provides
+
+     Part II — Business Model Canvas
+       BMC_PARTNERSHIPS      — key partnerships (Salesforce Ecosystem + Technical Arch)
+       BMC_ACTIVITIES        — key activities
+       BMC_VALUE_PROPS       — value propositions
+       BMC_RELATIONSHIPS     — customer relationships (Decision-Making & Stakeholders)
+       BMC_SEGMENTS          — customer segments (Decision-Making & Users)
+       BMC_RESOURCES         — key resources (Salesforce Ecosystem + Technical Arch)
+       BMC_CHANNELS          — channels (Decision-Making & Users)
+       BMC_COSTS             — cost structure (Business Alignment)
+       BMC_REVENUE           — revenue streams (Business Alignment)
+
+     Part III
+       BACKLOG_HTML          — ranked HMW opportunity backlog (variable-length)
+
+     Part IV
+       POV_FEED_HTML         — findings → POV sections mapping table
+       OPEN_GAPS_HTML        — open gaps table with owners and target dates
+
+     Confidence & Assumptions
+       CONFIDENCE_HTML       — discovery confidence score, named assumptions,
+                                   and open-gap list (variable-length)
+     ===================================================================== -->

@@ -1,0 +1,100 @@
+{
+  "_note": "Output produced by walking the refs/slack-insights.md flow over the mock fixtures. This is what the skill should generate. The validator checks it against the fixtures + the ref's rules.",
+
+  "stage1_discovery": {
+    "ranked_candidates": [
+      {"name": "#partner-particle-health", "tier": "High"},
+      {"name": "#particle-health-partnership", "tier": "High"},
+      {"name": "#gp-particle-health", "tier": "High"},
+      {"name": "#isv-particle", "tier": "High"},
+      {"name": "#partner-health-data-platforms", "tier": "Medium"},
+      {"name": "#particle-health-archive", "tier": "Medium"},
+      {"name": "#vbc-strategy", "tier": "Medium"}
+    ],
+    "dropped_low": ["#general-health-chatter", "#particles-physics-fun"],
+    "medium_high_count": 7,
+    "shortlist_capped_to": 6,
+    "shortlist_shown": [
+      "#partner-particle-health",
+      "#particle-health-partnership",
+      "#gp-particle-health",
+      "#isv-particle",
+      "#partner-health-data-platforms",
+      "#particle-health-archive"
+    ],
+    "disclosure": "showing top 6 of 7 matches — name a channel directly if the one you want isn't here",
+    "askuserquestion_render": {
+      "_rule": "AskUserQuestion caps at 4 options/question; 5-6 candidates split across two questions in one call",
+      "questions": [
+        {"header": "Channels (1 of 2)", "options": ["#partner-particle-health — High", "#particle-health-partnership — High", "#gp-particle-health — High", "#isv-particle — High"]},
+        {"header": "Channels (2 of 2)", "options": ["#partner-health-data-platforms — Medium", "#particle-health-archive — Medium"]}
+      ],
+      "options_per_question_max": 4
+    }
+  },
+
+  "stage1_read": {
+    "channels_confirmed_and_read": ["#partner-particle-health", "#particle-health-partnership"],
+    "window_days": 90
+  },
+
+  "extracted_facts": [
+    {"bucket": "exec_sponsor",      "fact": "SF-side exec sponsor is Maria Chen (RVP, Healthcare), bought in, wants a referenceable VBC story", "attribution": "@jordan.pm, May 14", "confidence": "[from internal Slack — confirm]", "source_id": "m1", "feeds_pov_section": "Solution Alignment / Provenance"},
+    {"bucket": "pilot",             "fact": "Reveleer verbally agreed to be the Health Cloud pilot design partner (not signed)", "attribution": "@lee.ae, May 16", "confidence": "[from internal Slack — confirm]", "source_id": "m2", "feeds_pov_section": "Target Markets"},
+    {"bucket": "commercial_model",  "fact": "Particle wants OEM/embedded, not a managed package", "attribution": "@sara.isv, May 22", "confidence": "[from internal Slack — confirm]", "source_id": "m3", "feeds_pov_section": "ISV Commercial Model", "conflict": true},
+    {"bucket": "stakeholder_needs", "fact": "Product team needs Snapshot to ground an Agentforce healthcare agent before committing roadmap (gating capability)", "attribution": "@deepa.pmm, May 27", "confidence": "[from internal Slack — confirm]", "source_id": "m4", "feeds_pov_section": "Solution Alignment"},
+    {"bucket": "blocker",           "fact": "Legal blocked on Epic data-access exposure (active litigation); security review can't start until cleared", "attribution": "@jordan.pm, Jun 02", "confidence": "[from internal Slack — confirm]", "source_id": "m5", "feeds_pov_section": "Problem Space → Risks"},
+    {"bucket": "proof_point",       "fact": "Particle closed Upperline Health last quarter, 90% patient match cited", "attribution": "@lee.ae, Jun 05", "confidence": "[from internal Slack — confirm]", "source_id": "m6", "feeds_pov_section": "Solution / Target Markets"},
+    {"bucket": "timeline",          "fact": "PADA target end of Q3; security review kickoff first week of August; exec readout Jun 20", "attribution": "@maria.chen, Jun 09", "confidence": "[from internal Slack — confirm]", "source_id": "m7", "feeds_pov_section": "MVP & Development Priorities / TBD owner-and-date"}
+  ],
+
+  "dropped_as_noise": ["m8", "m9"],
+
+  "conflicts_surfaced": [
+    {
+      "field": "Commercial model / App Type",
+      "pov_says": "Mixed — composite managed package (ISVforce) + consumption  [partner-confirmed in Stage 3 of the POV]",
+      "slack_says": "OEM / embedded  [from internal Slack — confirm] (@sara.isv, May 22)",
+      "resolution": "surfaced as a Stage 3 question; Slack does NOT overwrite the POV value",
+      "stage3_question": "POV records a mixed managed-package + consumption model, but #particle-health-partnership (@sara.isv) says Particle wants OEM/embedded. Which is current?"
+    }
+  ],
+
+  "channel_narrative": {
+    "placement": "Confidence & Assumptions",
+    "label": "[internal Slack sentiment — not partner-confirmed]",
+    "text": "Sentiment across the partner/deal channels is strongly positive and accelerating — the team reads as energized, and the partner is described as highly responsive and pushing to move faster. Tempered by an unresolved legal/Epic data-access blocker that gates the security review.",
+    "basis": "synthesized from 9 messages across #partner-particle-health and #particle-health-partnership, May–Jun"
+  },
+
+  "stage3_pruning": {
+    "_pov_open_gaps_before": [
+      "Named Salesforce design partner / pilot",
+      "Named Salesforce exec sponsor and co-sell motion",
+      "PADA execution / target date",
+      "Stakeholder needs (Product / Advisory / Sales)"
+    ],
+    "suppressed": [
+      {"gap": "Named exec sponsor", "now_filled_by": "m1 (Maria Chen)", "confidence": "[from internal Slack — confirm]"},
+      {"gap": "Named design partner / pilot", "now_filled_by": "m2 (Reveleer, verbal)", "confidence": "[from internal Slack — confirm]"},
+      {"gap": "Product stakeholder need", "now_filled_by": "m4 (Snapshot→Agentforce grounding)", "confidence": "[from internal Slack — confirm]"}
+    ],
+    "narrowed": [
+      {"gap": "PADA execution", "residual_question": "Slack says PADA targeted end of Q3 (@maria.chen) — is it signed yet, or still in legal?"}
+    ],
+    "converted_to_conflict": [
+      {"gap": "Commercial model", "question": "POV says mixed managed-package+consumption; Slack says OEM/embedded — which holds?"}
+    ],
+    "visible_note": "4 of the POV's open gaps were pre-answered or sharpened from #partner-particle-health / #particle-health-partnership; remaining questions below are genuine gaps.",
+    "question_count_after_pruning": 3
+  },
+
+  "research_provenance_entry": {
+    "channels_read": ["#partner-particle-health — High", "#particle-health-partnership — High"],
+    "window_days": 90,
+    "message_counts": {"#partner-particle-health": 6, "#particle-health-partnership": 5},
+    "facts_by_bucket": {"exec_sponsor": 1, "pilot": 1, "commercial_model": 1, "stakeholder_needs": 1, "blocker": 1, "proof_point": 1, "timeline": 1},
+    "discovery_disclosure": "top 6 of 7 Medium+High shown",
+    "narrative_produced": true
+  }
+}

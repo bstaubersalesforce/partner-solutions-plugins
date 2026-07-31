@@ -1,0 +1,25 @@
+{
+  "status": 0,
+  "result": {
+    "records": [
+      {
+        "attributes": {"type": "sfbase__EntitlementDefinitionMap__c"},
+        "sfbase__Product__r": {"attributes": {"type": "Product2"}, "Name": "Health Cloud - Service - Unlimited Edition - OEM"},
+        "EntitlementDefinitionName__c": "UE Sites",
+        "sfbase__EntitlementDefinition__r": {
+          "attributes": {"type": "sfbase__EntitlementDefinition__c"},
+          "RecordType": {"attributes": {"type": "RecordType"}, "Name": "Sites"},
+          "UsageType__r": null
+        },
+        "sfbase__Quantity__c": 1000000,
+        "sfbase__ServiceEnabling__c": true,
+        "EntitlementTreatment__c": "None",
+        "UsageModel__c": "N/A",
+        "AddOnSKU__r": null
+      }
+    ],
+    "totalSize": 1,
+    "done": true
+  },
+  "warnings": []
+}

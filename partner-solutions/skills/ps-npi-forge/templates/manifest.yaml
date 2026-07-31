@@ -1,0 +1,305 @@
+release: <release>
+product_slug: <product-slug>
+parent_sku: <parent-sku>
+slack_channel: ""
+artifacts:
+  00-executive-summary:
+    status: pending
+    confidence: 0.0
+    rationale: ""
+    sources: []
+    placeholders:
+    loops:
+      claim_verification:
+        verdict: ""
+        note: ""
+      completeness:
+        verdict: ""
+        note: ""
+      uncertainty:
+        verdict: ""
+        note: ""
+      partner_lens:
+        verdict: ""
+        note: ""
+    last_generated: ""
+  01-brief:
+    status: pending
+    confidence: 0.0
+    rationale: ""
+    sources: []
+    placeholders:
+    loops:
+      claim_verification:
+        verdict: ""
+        note: ""
+      completeness:
+        verdict: ""
+        note: ""
+      uncertainty:
+        verdict: ""
+        note: ""
+      partner_lens:
+        verdict: ""
+        note: ""
+    last_generated: ""
+  02-slide-summary:
+    status: pending
+    confidence: 0.0
+    rationale: ""
+    sources: []
+    placeholders:
+    loops:
+      claim_verification:
+        verdict: ""
+        note: ""
+      completeness:
+        verdict: ""
+        note: ""
+      uncertainty:
+        verdict: ""
+        note: ""
+      partner_lens:
+        verdict: ""
+        note: ""
+    last_generated: ""
+  03-internal-enablement:
+    status: pending
+    confidence: 0.0
+    rationale: ""
+    sources: []
+    placeholders:
+    loops:
+      claim_verification:
+        verdict: ""
+        note: ""
+      completeness:
+        verdict: ""
+        note: ""
+      uncertainty:
+        verdict: ""
+        note: ""
+      partner_lens:
+        verdict: ""
+        note: ""
+    last_generated: ""
+  04-internal-faq:
+    status: pending
+    confidence: 0.0
+    rationale: ""
+    sources: []
+    placeholders:
+    loops:
+      claim_verification:
+        verdict: ""
+        note: ""
+      completeness:
+        verdict: ""
+        note: ""
+      uncertainty:
+        verdict: ""
+        note: ""
+      partner_lens:
+        verdict: ""
+        note: ""
+    last_generated: ""
+  05-external-faq:
+    status: pending
+    confidence: 0.0
+    rationale: ""
+    sources: []
+    placeholders:
+    loops:
+      claim_verification:
+        verdict: ""
+        note: ""
+      completeness:
+        verdict: ""
+        note: ""
+      uncertainty:
+        verdict: ""
+        note: ""
+      partner_lens:
+        verdict: ""
+        note: ""
+    last_generated: ""
+  06-license-entitlements:
+    status: pending
+    confidence: 0.0
+    rationale: ""
+    sources: []
+    placeholders:
+    loops:
+      claim_verification:
+        verdict: ""
+        note: ""
+      completeness:
+        verdict: ""
+        note: ""
+      uncertainty:
+        verdict: ""
+        note: ""
+      partner_lens:
+        verdict: ""
+        note: ""
+    last_generated: ""
+  07-addon-tiering:
+    status: pending
+    confidence: 0.0
+    rationale: ""
+    sources: []
+    placeholders:
+    loops:
+      claim_verification:
+        verdict: ""
+        note: ""
+      completeness:
+        verdict: ""
+        note: ""
+      uncertainty:
+        verdict: ""
+        note: ""
+      partner_lens:
+        verdict: ""
+        note: ""
+    last_generated: ""
+  08-setup-guide:
+    status: pending
+    confidence: 0.0
+    rationale: ""
+    sources: []
+    placeholders:
+    loops:
+      claim_verification:
+        verdict: ""
+        note: ""
+      completeness:
+        verdict: ""
+        note: ""
+      uncertainty:
+        verdict: ""
+        note: ""
+      partner_lens:
+        verdict: ""
+        note: ""
+    last_generated: ""
+  09-org-provisioning-validation:
+    status: pending
+    confidence: 0.0
+    rationale: ""
+    sources: []
+    placeholders:
+    loops:
+      claim_verification:
+        verdict: ""
+        note: ""
+      completeness:
+        verdict: ""
+        note: ""
+      uncertainty:
+        verdict: ""
+        note: ""
+      partner_lens:
+        verdict: ""
+        note: ""
+    last_generated: ""
+  10-partner-profile-pov:
+    status: pending
+    confidence: 0.0
+    rationale: ""
+    sources: []
+    placeholders:
+    loops:
+      claim_verification:
+        verdict: ""
+        note: ""
+      completeness:
+        verdict: ""
+        note: ""
+      uncertainty:
+        verdict: ""
+        note: ""
+      partner_lens:
+        verdict: ""
+        note: ""
+    last_generated: ""
+  11-solution-infographic:
+    status: pending
+    confidence: 0.0
+    rationale: ""
+    sources: []
+    placeholders:
+    loops:
+      claim_verification:
+        verdict: ""
+        note: ""
+      completeness:
+        verdict: ""
+        note: ""
+      uncertainty:
+        verdict: ""
+        note: ""
+      partner_lens:
+        verdict: ""
+        note: ""
+    last_generated: ""
+  12-marketecture:
+    status: pending
+    confidence: 0.0
+    rationale: ""
+    sources: []
+    placeholders:
+    loops:
+      claim_verification:
+        verdict: ""
+        note: ""
+      completeness:
+        verdict: ""
+        note: ""
+      uncertainty:
+        verdict: ""
+        note: ""
+      partner_lens:
+        verdict: ""
+        note: ""
+    last_generated: ""
+  13-demand-plan:
+    status: pending
+    confidence: 0.0
+    rationale: ""
+    sources: []
+    placeholders:
+    loops:
+      claim_verification:
+        verdict: ""
+        note: ""
+      completeness:
+        verdict: ""
+        note: ""
+      uncertainty:
+        verdict: ""
+        note: ""
+      partner_lens:
+        verdict: ""
+        note: ""
+    last_generated: ""
+  14-exec-infographic:
+    status: pending
+    confidence: 0.0
+    rationale: ""
+    sources: []
+    placeholders:
+    loops:
+      claim_verification:
+        verdict: ""
+        note: ""
+      completeness:
+        verdict: ""
+        note: ""
+      uncertainty:
+        verdict: ""
+        note: ""
+      partner_lens:
+        verdict: ""
+        note: ""
+    last_generated: ""

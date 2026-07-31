@@ -1,0 +1,10 @@
+#!/usr/bin/env bash
+# Preflight: verify tooling{{PREFLIGHT_PURPOSE_SUFFIX}} before the workshop build.
+set -uo pipefail
+ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
+. "$ROOT/scripts/lib/common.sh"
+{{ORG_RESOLUTION_LINE}}
+FAILED=0
+{{TOOLING_CHECKS}}
+{{ORG_PREFLIGHT_BLOCK}}
+exit $FAILED

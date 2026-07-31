@@ -1,0 +1,25 @@
+{
+  "content_dirs": {},
+  "duration": "1-day",
+  "mode": "lab",
+  "modules": [
+    {
+      "checkpoint": false,
+      "n": 0,
+      "title": "Introduction"
+    }
+  ],
+  "name": "educate-only-kit",
+  "partner_overlay": "reference",
+  "provisioning": {
+    "model": "none",
+    "needs_org": false,
+    "required_features": []
+  },
+  "reference_build": {
+    "path": "sfdx/",
+    "source": "none"
+  },
+  "surfaces": {},
+  "title": "Educate-Only Workshop"
+}

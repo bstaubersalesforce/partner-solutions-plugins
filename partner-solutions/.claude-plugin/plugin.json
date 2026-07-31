@@ -1,0 +1,6 @@
+{
+  "name": "partner-solutions",
+  "displayName": "Partner Solutions Forge",
+  "description": "Five Tier-3 skills for Salesforce Partner Solutions engagements: tech-strat-pov-forge (POV docs), pie-poc-forge (installable PoC packages), ps-npi-forge (NPI artifact family), workshop-forge (partner workshop kits), partner-blocker-forge (claimed-vs-real blocker diagnosis).",
+  "version": "0.1.0"
+}

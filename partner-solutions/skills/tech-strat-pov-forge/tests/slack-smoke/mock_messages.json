@@ -1,0 +1,18 @@
+{
+  "_note": "FABRICATED test fixture. Not real Slack messages. Names are invented for testing. Simulates ~90-day history from the two top-confidence channels. Designed to exercise all 7 extraction buckets, noise rejection, and one deliberate Slack-vs-POV conflict. Each message has an id so the validator can confirm every extracted fact traces to a real source (no hallucination).",
+  "channels_read": ["#partner-particle-health", "#particle-health-partnership"],
+  "window_days": 90,
+  "messages": [
+    {"id": "m1", "channel": "#partner-particle-health", "author": "jordan.pm", "date": "May 14", "text": "Confirmed our exec sponsor on the SF side is Maria Chen (RVP, Healthcare). She's bought in and wants this as a referenceable VBC story.", "signal_bucket": "exec_sponsor"},
+    {"id": "m2", "channel": "#partner-particle-health", "author": "lee.ae", "date": "May 16", "text": "Reveleer verbally agreed to be the design partner for the Health Cloud pilot. Not signed yet but they're keen.", "signal_bucket": "pilot"},
+    {"id": "m3", "channel": "#particle-health-partnership", "author": "sara.isv", "date": "May 22", "text": "Particle's team wants to go OEM/embedded, NOT a managed package. They were explicit on the call - embed our capability in their offering.", "signal_bucket": "commercial_model", "conflict_with_pov": "POV ISV Commercial Model says App Type = Mixed (composite managed package / ISVforce + consumption). Slack says OEM/embedded. This MUST surface as a conflict, not silently overwrite."},
+    {"id": "m4", "channel": "#particle-health-partnership", "author": "deepa.pmm", "date": "May 27", "text": "Product team's ask: they need Snapshot summaries to ground an Agentforce healthcare agent before they'll commit roadmap. That's the gating capability.", "signal_bucket": "stakeholder_needs"},
+    {"id": "m5", "channel": "#partner-particle-health", "author": "jordan.pm", "date": "Jun 02", "text": "Real blocker: legal is stuck on the Epic data-access exposure given the active litigation. Until that's cleared, security review can't start.", "signal_bucket": "blocker"},
+    {"id": "m6", "channel": "#particle-health-partnership", "author": "lee.ae", "date": "Jun 05", "text": "Proof point we can use: Particle closed a deal with Upperline Health last quarter, 90% patient match rate cited.", "signal_bucket": "proof_point"},
+    {"id": "m7", "channel": "#partner-particle-health", "author": "maria.chen", "date": "Jun 09", "text": "Target: PADA signed by end of Q3, security review kickoff first week of August. Exec readout scheduled Jun 20.", "signal_bucket": "timeline"},
+    {"id": "m8", "channel": "#partner-particle-health", "author": "intern.sam", "date": "May 15", "text": "anyone else having trouble with the coffee machine on 4? asking for a friend ☕", "signal_bucket": "NOISE", "why": "banter - must be dropped"},
+    {"id": "m9", "channel": "#particle-health-partnership", "author": "lee.ae", "date": "May 20", "text": "lunch moved to 12:30, room Cumulus. brings laptops.", "signal_bucket": "NOISE", "why": "scheduling - must be dropped"},
+    {"id": "m10", "channel": "#partner-particle-health", "author": "deepa.pmm", "date": "Jun 06", "text": "🎉🎉 great energy on the call today, this one feels like it's really moving. team is fired up.", "signal_bucket": "SENTIMENT_ONLY", "why": "no discrete fact, but feeds the narrative/sentiment read"},
+    {"id": "m11", "channel": "#particle-health-partnership", "author": "jordan.pm", "date": "Jun 08", "text": "agreed, momentum is strong - partner is responsive within hours and pushing to accelerate.", "signal_bucket": "SENTIMENT_ONLY", "why": "feeds narrative"}
+  ]
+}

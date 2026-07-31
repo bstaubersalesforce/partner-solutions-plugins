@@ -1,0 +1,1424 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>{{PARTNER_NAME}} — MVP Build Plan</title>
+  <style>
+    /* =====================================================================
+       RESET & BASE
+    ===================================================================== */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: "Salesforce Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+      font-size: 15px;
+      line-height: 1.6;
+      color: #1a1a1a;
+      background: #f4f6fb;
+    }
+
+    /* =====================================================================
+       LAYOUT
+    ===================================================================== */
+    .page-wrapper {
+      max-width: 900px;
+      margin: 32px auto;
+      background: #ffffff;
+      border-radius: 8px;
+      box-shadow: 0 2px 16px rgba(3,45,96,0.10);
+      overflow: hidden;
+    }
+
+    /* =====================================================================
+       HEADER BAND
+    ===================================================================== */
+    .doc-header {
+      background: #032d60;
+      color: #ffffff;
+      padding: 36px 40px 28px;
+    }
+
+    .doc-header .partner-name {
+      font-size: 13px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: #7db8f7;
+      margin-bottom: 6px;
+    }
+
+    .doc-header h1 {
+      font-size: 26px;
+      font-weight: 700;
+      line-height: 1.2;
+      margin-bottom: 20px;
+    }
+
+    .meta-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+      gap: 12px 24px;
+      font-size: 13px;
+    }
+
+    .meta-item label {
+      display: block;
+      color: #7db8f7;
+      font-size: 11px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.07em;
+      margin-bottom: 2px;
+    }
+
+    .meta-item span {
+      color: #ffffff;
+      font-weight: 500;
+    }
+
+    /* =====================================================================
+       OPPORTUNITY STAGE BADGE
+    ===================================================================== */
+    .stage-badge {
+      display: inline-block;
+      background: #0176d3;
+      color: #ffffff;
+      font-size: 11px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      padding: 2px 9px;
+      border-radius: 12px;
+    }
+
+    /* =====================================================================
+       CONTENT AREA
+    ===================================================================== */
+    .content {
+      padding: 36px 40px 48px;
+    }
+
+    /* =====================================================================
+       SECTION STRUCTURE
+    ===================================================================== */
+    .section {
+      margin-bottom: 40px;
+    }
+
+    .section-title {
+      font-size: 17px;
+      font-weight: 700;
+      color: #032d60;
+      border-bottom: 2px solid #0176d3;
+      padding-bottom: 6px;
+      margin-bottom: 18px;
+    }
+
+    .subsection-title {
+      font-size: 14px;
+      font-weight: 700;
+      color: #032d60;
+      margin-top: 20px;
+      margin-bottom: 10px;
+    }
+
+    /* =====================================================================
+       EXECUTIVE SUMMARY CALLOUT BOX
+    ===================================================================== */
+    .summary-box {
+      background: #f0f5ff;
+      border-left: 4px solid #0176d3;
+      border-radius: 4px;
+      padding: 16px 20px;
+      margin-bottom: 18px;
+      font-size: 15px;
+      color: #1a1a1a;
+    }
+
+    .summary-box p { margin-bottom: 6px; }
+    .summary-box p:last-child { margin-bottom: 0; }
+
+    .summary-row {
+      display: flex;
+      gap: 8px;
+      margin-top: 10px;
+      font-size: 14px;
+    }
+
+    .summary-row strong {
+      min-width: 80px;
+      color: #032d60;
+    }
+
+    /* =====================================================================
+       SCOPE LISTS
+    ===================================================================== */
+    .scope-columns {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 24px;
+    }
+
+    .scope-panel {
+      background: #f8fafd;
+      border: 1px solid #d8e0ec;
+      border-radius: 6px;
+      padding: 16px 18px;
+    }
+
+    .scope-panel h4 {
+      font-size: 12px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.07em;
+      color: #0176d3;
+      margin-bottom: 10px;
+    }
+
+    .scope-panel ul {
+      list-style: none;
+      padding: 0;
+    }
+
+    .scope-panel ul li {
+      padding: 4px 0 4px 18px;
+      position: relative;
+      font-size: 14px;
+      color: #1a1a1a;
+      border-bottom: 1px solid #eef1f7;
+    }
+
+    .scope-panel ul li:last-child { border-bottom: none; }
+
+    .scope-panel ul li::before {
+      content: "•";
+      position: absolute;
+      left: 4px;
+      color: #0176d3;
+    }
+
+    .deferred-group { margin-top: 12px; }
+
+    .deferred-label {
+      font-size: 11px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.07em;
+      color: #444444;
+      margin-bottom: 6px;
+    }
+
+    /* =====================================================================
+       PHASE BADGES
+    ===================================================================== */
+    .badge {
+      display: inline-block;
+      font-size: 11px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      padding: 2px 8px;
+      border-radius: 10px;
+    }
+
+    .badge-mvp  { background: #2e7d32; color: #ffffff; }
+    .badge-h1   { background: #e65100; color: #ffffff; }
+    .badge-h2   { background: #546e7a; color: #ffffff; }
+    .badge-h3   { background: #6a1b9a; color: #ffffff; }
+
+    /* =====================================================================
+       FEATURE BLOCKS
+    ===================================================================== */
+    .feature-block {
+      border: 1px solid #d8e0ec;
+      border-radius: 8px;
+      margin-bottom: 24px;
+      overflow: hidden;
+    }
+
+    .feature-header {
+      background: #032d60;
+      color: #ffffff;
+      padding: 12px 18px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .feature-header h3 {
+      font-size: 15px;
+      font-weight: 700;
+      flex: 1;
+    }
+
+    .persona-tag {
+      display: inline-block;
+      background: #0176d3;
+      color: #ffffff;
+      font-size: 11px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      padding: 3px 10px;
+      border-radius: 12px;
+      white-space: nowrap;
+    }
+
+    .source-tag {
+      display: inline-block;
+      background: #e8edf5;
+      color: #032d60;
+      font-size: 0.72rem;
+      font-weight: 600;
+      padding: 2px 7px;
+      border-radius: 3px;
+      white-space: nowrap;
+    }
+
+    .feature-body {
+      padding: 18px;
+    }
+
+    .feature-meta {
+      font-size: 12px;
+      color: #444444;
+      margin-bottom: 14px;
+    }
+
+    .user-story-callout {
+      background: #f0f5ff;
+      border-left: 4px solid #0176d3;
+      border-radius: 0 4px 4px 0;
+      padding: 12px 16px;
+      margin-bottom: 16px;
+      font-style: italic;
+      font-size: 14px;
+      color: #032d60;
+    }
+
+    .ac-list {
+      list-style: none;
+      padding: 0;
+    }
+
+    .ac-list li {
+      display: flex;
+      align-items: flex-start;
+      gap: 8px;
+      padding: 6px 0;
+      font-size: 14px;
+      border-bottom: 1px solid #f0f3f9;
+    }
+
+    .ac-list li:last-child { border-bottom: none; }
+
+    .ac-checkbox {
+      width: 14px;
+      height: 14px;
+      border: 2px solid #0176d3;
+      border-radius: 3px;
+      flex-shrink: 0;
+      margin-top: 2px;
+    }
+
+    /* =====================================================================
+       TABLES
+    ===================================================================== */
+    .styled-table {
+      width: 100%;
+      border-collapse: separate;
+      border-spacing: 0;
+      font-size: 14px;
+      margin-bottom: 10px;
+      border-radius: 6px;
+      overflow: hidden;
+      border: 1px solid #d8e0ec;
+    }
+
+    .styled-table thead tr {
+      background: #032d60;
+      color: #ffffff;
+    }
+
+    .styled-table thead th {
+      padding: 10px 14px;
+      font-size: 12px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      text-align: left;
+    }
+
+    .styled-table tbody tr:nth-child(even) {
+      background: #f0f5ff;
+    }
+
+    .styled-table tbody tr:nth-child(odd) {
+      background: #ffffff;
+    }
+
+    .styled-table tbody td {
+      padding: 9px 14px;
+      border-bottom: 1px solid #e8edf5;
+      vertical-align: top;
+    }
+
+    .styled-table tbody tr:last-child td {
+      border-bottom: none;
+    }
+
+    /* Risk level colors */
+    .risk-h { color: #c62828; font-weight: 700; }
+    .risk-m { color: #e65100; font-weight: 700; }
+    .risk-l { color: #2e7d32; font-weight: 700; }
+
+    /* =====================================================================
+       DATA / UI FIELDS
+    ===================================================================== */
+    .field-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px 24px;
+      margin-bottom: 12px;
+    }
+
+    .field-item {
+      background: #f8fafd;
+      border: 1px solid #d8e0ec;
+      border-radius: 5px;
+      padding: 10px 14px;
+      font-size: 14px;
+    }
+
+    .field-item label {
+      display: block;
+      font-size: 11px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.07em;
+      color: #444444;
+      margin-bottom: 3px;
+    }
+
+    /* =====================================================================
+       BLOCKERS / OPEN ITEMS CHECKLIST
+    ===================================================================== */
+    .checklist {
+      list-style: none;
+      padding: 0;
+    }
+
+    .checklist li {
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      padding: 8px 0;
+      font-size: 14px;
+      border-bottom: 1px dashed #d8e0ec;
+    }
+
+    .checklist li:last-child { border-bottom: none; }
+
+    .checklist .check-box {
+      width: 16px;
+      height: 16px;
+      border: 2px solid #0176d3;
+      border-radius: 3px;
+      flex-shrink: 0;
+      margin-top: 2px;
+    }
+
+    .blocker-owner {
+      color: #444444;
+      font-size: 12px;
+      margin-left: 4px;
+    }
+
+    /* =====================================================================
+       CONFIDENCE SCORE
+    ===================================================================== */
+    .confidence-band {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+      background: #f0f5ff;
+      border: 1px solid #d8e0ec;
+      border-radius: 8px;
+      padding: 16px 20px;
+      margin-bottom: 18px;
+    }
+
+    .confidence-score {
+      font-size: 36px;
+      font-weight: 800;
+      color: #032d60;
+      line-height: 1;
+    }
+
+    .confidence-label {
+      font-size: 12px;
+      font-weight: 600;
+      text-transform: uppercase;
+      color: #444444;
+      letter-spacing: 0.07em;
+    }
+
+    .confidence-desc {
+      font-size: 13px;
+      color: #1a1a1a;
+    }
+
+    /* =====================================================================
+       NUMBERED / ASSUMPTION LISTS
+    ===================================================================== */
+    .numbered-list {
+      list-style: decimal;
+      padding-left: 22px;
+      font-size: 14px;
+    }
+
+    .numbered-list li {
+      padding: 4px 0;
+    }
+
+    /* =====================================================================
+       COMMERCIAL / PROGRAM ALIGNED PILL GRID
+    ===================================================================== */
+    .pill-grid {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 8px;
+    }
+
+    .pill {
+      background: #e8edf5;
+      color: #032d60;
+      font-size: 12px;
+      font-weight: 600;
+      padding: 4px 12px;
+      border-radius: 12px;
+      border: 1px solid #c2cfe0;
+    }
+
+    /* =====================================================================
+       INLINE DETAIL ROWS (Commercial / Program)
+    ===================================================================== */
+    .detail-row {
+      display: flex;
+      gap: 10px;
+      padding: 8px 0;
+      border-bottom: 1px solid #e8edf5;
+      font-size: 14px;
+    }
+
+    .detail-row:last-child { border-bottom: none; }
+
+    .detail-row strong {
+      min-width: 200px;
+      color: #032d60;
+    }
+
+    /* =====================================================================
+       DIRECTION NOTE
+    ===================================================================== */
+    .table-note {
+      font-size: 12px;
+      color: #444444;
+      font-style: italic;
+      margin-top: 6px;
+      margin-bottom: 18px;
+    }
+
+    /* =====================================================================
+       FOOTER
+    ===================================================================== */
+    .doc-footer {
+      background: #032d60;
+      color: #7db8f7;
+      font-size: 12px;
+      text-align: center;
+      padding: 14px 40px;
+    }
+
+    /* =====================================================================
+       PRINT STYLES
+    ===================================================================== */
+    @media print {
+      @page {
+        margin: 1in;
+        size: letter;
+      }
+
+      body { background: #ffffff; }
+
+      .page-wrapper {
+        box-shadow: none;
+        border-radius: 0;
+        margin: 0;
+        max-width: 100%;
+      }
+
+      .doc-header { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+      .styled-table thead tr { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+
+      .summary-box, .scope-panel, .badge-mvp, .badge-h1, .badge-h2,
+      .confidence-band, .feature-header, .user-story-callout {
+        print-color-adjust: exact;
+        -webkit-print-color-adjust: exact;
+      }
+
+      .section {
+        break-inside: avoid;
+        page-break-inside: avoid;
+      }
+      .feature-block {
+        break-inside: avoid;
+        page-break-inside: avoid;
+      }
+
+      .meta-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .doc-footer {
+        background: none;
+        color: #444444;
+        border-top: 1px solid #d8e0ec;
+      }
+    }
+  </style>
+</head>
+<body>
+<!-- Home-page back-link. Fill the HOME_HREF token in the anchor below with {SLUG}-index.html when part of a package; remove this entire <a> line for a standalone artifact (no home page). The token is intentionally not repeated in this comment so a plain string-replace fills only the anchor. -->
+<a href="{{HOME_HREF}}" style="position:fixed;top:14px;left:14px;z-index:9999;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;font-size:12px;font-weight:700;letter-spacing:0.04em;text-decoration:none;color:#fff;background:#0176d3;padding:7px 14px;border-radius:100px;box-shadow:0 2px 8px rgba(0,0,0,0.25);">&#8592; All artifacts</a>
+
+<div class="page-wrapper">
+
+  <!-- ===================================================================
+       HEADER
+  ==================================================================== -->
+  <header class="doc-header">
+    <div class="partner-name">{{PARTNER_NAME}}</div>
+    <h1>MVP Build Plan</h1>
+    <div class="meta-grid">
+      <div class="meta-item">
+        <label>POV Reference</label>
+        <span>{{POV_REFERENCE}}</span>
+      </div>
+      <div class="meta-item">
+        <label>Build Plan Date</label>
+        <span>{{BUILD_PLAN_DATE}}</span>
+      </div>
+      <div class="meta-item">
+        <label>Prepared By</label>
+        <span>{{PREPARED_BY}}</span>
+      </div>
+      <div class="meta-item">
+        <label>Target Audience</label>
+        <span>{{TARGET_AUDIENCE}}</span>
+      </div>
+      <div class="meta-item">
+        <label>Opportunity Stage</label>
+        <span><span class="stage-badge">{{OPPORTUNITY_STAGE}}</span></span>
+      </div>
+    </div>
+  </header>
+
+  <!-- ===================================================================
+       CONTENT
+  ==================================================================== -->
+  <main class="content">
+
+    <!-- ---------------------------------------------------------------
+         1. EXECUTIVE SUMMARY
+    --------------------------------------------------------------- -->
+    <section class="section">
+      <h2 class="section-title">Executive Summary</h2>
+
+      <div class="summary-box">
+        <p>{{EXECUTIVE_SUMMARY}}</p>
+      </div>
+
+      <div class="summary-row">
+        <strong>Problem:</strong>
+        <span>{{PROBLEM_ONE_LINE}}</span>
+      </div>
+      <div class="summary-row">
+        <strong>Solution:</strong>
+        <span>{{SOLUTION_ONE_LINE}}</span>
+      </div>
+      <div class="summary-row">
+        <strong>MVP Goal:</strong>
+        <span>{{MVP_GOAL_ONE_LINE}}</span>
+      </div>
+    </section>
+
+    <!-- ---------------------------------------------------------------
+         2. MVP SCOPE
+    --------------------------------------------------------------- -->
+    <section class="section">
+      <h2 class="section-title">MVP Scope</h2>
+
+      <div class="scope-columns">
+
+        <!-- In Scope -->
+        <div class="scope-panel">
+          <h4>In Scope <span class="badge badge-mvp">MVP</span></h4>
+          <ul>
+            <li>{{IN_SCOPE_ITEM_1}}</li>
+            <li>{{IN_SCOPE_ITEM_2}}</li>
+            <li>{{IN_SCOPE_ITEM_3}}</li>
+          </ul>
+        </div>
+
+        <!-- Out of Scope -->
+        <div class="scope-panel">
+          <h4>Out of Scope (Post-MVP)</h4>
+
+          <div class="deferred-group">
+            <div class="deferred-label"><span class="badge badge-h1">H1</span> Horizon 1</div>
+            <ul>
+              <li>{{H1_DEFERRED_1}}</li>
+              <li>{{H1_DEFERRED_2}}</li>
+            </ul>
+          </div>
+
+          <div class="deferred-group">
+            <div class="deferred-label"><span class="badge badge-h2">H2</span> Horizon 2</div>
+            <ul>
+              <li>{{H2_DEFERRED_1}}</li>
+              <li>{{H2_DEFERRED_2}}</li>
+            </ul>
+          </div>
+
+          <div class="deferred-group">
+            <div class="deferred-label"><span class="badge badge-h3">H3</span> Horizon 3</div>
+            <ul>
+              <li>{{H3_DEFERRED_1}}</li>
+              <li>{{H3_DEFERRED_2}}</li>
+            </ul>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ---------------------------------------------------------------
+         3. FEATURE BREAKDOWN & USER STORIES
+    --------------------------------------------------------------- -->
+    <section class="section">
+      <h2 class="section-title">Feature Breakdown &amp; User Stories</h2>
+
+      <!-- Feature 1 -->
+      <div class="feature-block">
+        <div class="feature-header">
+          <h3>Feature 1: {{FEATURE_1_TITLE}}</h3>
+          <span class="persona-tag">{{FEATURE_1_PERSONA}}</span>
+        </div>
+        <div class="feature-body">
+          <div class="feature-meta">Source Use Case: {{FEATURE_1_USE_CASE}}</div>
+
+          <div class="user-story-callout">
+            As a <strong>{{FEATURE_1_PERSONA}}</strong>, I want to <strong>{{FEATURE_1_CAPABILITY}}</strong>,
+            so that <strong>{{FEATURE_1_OUTCOME}}</strong>.
+          </div>
+
+          <h4 class="subsection-title" style="margin-top:0;">Acceptance Criteria</h4>
+          <ul class="ac-list">
+            <li>
+              <span class="ac-checkbox"></span>
+              <span>Given <strong>{{AC1_CONTEXT}}</strong>, when <strong>{{AC1_ACTION}}</strong>, then <strong>{{AC1_RESULT}}</strong></span>
+            </li>
+            <li>
+              <span class="ac-checkbox"></span>
+              <span>{{AC1_KPI_CRITERION}}</span>
+            </li>
+            <li><span class="ac-checkbox"></span><span class="ac-text">{{AC1_EDGE_CASE}}</span></li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- Feature 2 -->
+      <div class="feature-block">
+        <div class="feature-header">
+          <h3>Feature 2: {{FEATURE_2_TITLE}}</h3>
+          <span class="persona-tag">{{FEATURE_2_PERSONA}}</span>
+        </div>
+        <div class="feature-body">
+          <div class="feature-meta">Source Use Case: {{FEATURE_2_USE_CASE}}</div>
+
+          <div class="user-story-callout">
+            As a <strong>{{FEATURE_2_PERSONA}}</strong>, I want to <strong>{{FEATURE_2_CAPABILITY}}</strong>,
+            so that <strong>{{FEATURE_2_OUTCOME}}</strong>.
+          </div>
+
+          <h4 class="subsection-title" style="margin-top:0;">Acceptance Criteria</h4>
+          <ul class="ac-list">
+            <li>
+              <span class="ac-checkbox"></span>
+              <span>Given <strong>{{AC2_CONTEXT}}</strong>, when <strong>{{AC2_ACTION}}</strong>, then <strong>{{AC2_RESULT}}</strong></span>
+            </li>
+            <li>
+              <span class="ac-checkbox"></span>
+              <span>{{AC2_KPI_CRITERION}}</span>
+            </li>
+            <li><span class="ac-checkbox"></span><span class="ac-text">{{AC2_EDGE_CASE}}</span></li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- Feature 3 -->
+      <div class="feature-block">
+        <div class="feature-header">
+          <h3>Feature 3: {{FEATURE_3_TITLE}}</h3>
+          <span class="persona-tag">{{FEATURE_3_PERSONA}}</span>
+        </div>
+        <div class="feature-body">
+          <div class="feature-meta">Source Use Case: {{FEATURE_3_USE_CASE}}</div>
+
+          <div class="user-story-callout">
+            As a <strong>{{FEATURE_3_PERSONA}}</strong>, I want to <strong>{{FEATURE_3_CAPABILITY}}</strong>,
+            so that <strong>{{FEATURE_3_OUTCOME}}</strong>.
+          </div>
+
+          <h4 class="subsection-title" style="margin-top:0;">Acceptance Criteria</h4>
+          <ul class="ac-list">
+            <li>
+              <span class="ac-checkbox"></span>
+              <span>Given <strong>{{AC3_CONTEXT}}</strong>, when <strong>{{AC3_ACTION}}</strong>, then <strong>{{AC3_RESULT}}</strong></span>
+            </li>
+            <li>
+              <span class="ac-checkbox"></span>
+              <span>{{AC3_KPI_CRITERION}}</span>
+            </li>
+            <li><span class="ac-checkbox"></span><span class="ac-text">{{AC3_EDGE_CASE}}</span></li>
+          </ul>
+        </div>
+      </div>
+
+    </section>
+
+    <!-- ---------------------------------------------------------------
+         4. TECHNICAL REQUIREMENTS
+    --------------------------------------------------------------- -->
+    <section class="section">
+      <h2 class="section-title">Technical Requirements</h2>
+
+      <!-- Salesforce Platform Requirements -->
+      <h3 class="subsection-title">Salesforce Platform Requirements</h3>
+      <table class="styled-table">
+        <thead>
+          <tr>
+            <th>Requirement</th>
+            <th>Details</th>
+            <th>Phase</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Application Type</td>
+            <td>{{APP_TYPE}}</td>
+            <td><span class="badge badge-mvp">MVP</span></td>
+          </tr>
+          <tr>
+            <td>Salesforce Edition</td>
+            <td>{{SF_EDITION}}</td>
+            <td><span class="badge badge-mvp">MVP</span></td>
+          </tr>
+          <tr>
+            <td>{{SF_CLOUD_1}}</td>
+            <td>{{SF_CLOUD_1_USAGE}}</td>
+            <td><span class="badge badge-mvp">MVP</span></td>
+          </tr>
+          <tr>
+            <td>{{SF_CLOUD_2}}</td>
+            <td>{{SF_CLOUD_2_USAGE}}</td>
+            <td><span class="badge badge-h1">H1</span></td>
+          </tr>
+          <tr>
+            <td>{{SF_ADDON_SKU}}</td>
+            <td>{{SF_ADDON_SKU_USAGE}}</td>
+            <td><span class="badge badge-h1">H1</span></td>
+          </tr>
+        </tbody>
+      </table>
+
+      <!-- Integration Requirements -->
+      <h3 class="subsection-title">Integration Requirements</h3>
+      <table class="styled-table">
+        <thead>
+          <tr>
+            <th>External System</th>
+            <th>Integration Type</th>
+            <th>Data Direction</th>
+            <th>Phase</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>{{INTEGRATION_SYSTEM_1}}</td>
+            <td>{{INTEGRATION_TYPE_1}}</td>
+            <td>{{INTEGRATION_DIRECTION_1}}</td>
+            <td><span class="badge badge-mvp">MVP</span></td>
+          </tr>
+          <tr>
+            <td>{{INTEGRATION_SYSTEM_2}}</td>
+            <td>{{INTEGRATION_TYPE_2}}</td>
+            <td>{{INTEGRATION_DIRECTION_2}}</td>
+            <td><span class="badge badge-h1">H1</span></td>
+          </tr>
+        </tbody>
+      </table>
+      <p class="table-note">Direction is relative to Salesforce: In = data flowing into SF, Out = data from SF, Bi = bidirectional.</p>
+
+      <!-- Data Requirements -->
+      <h3 class="subsection-title">Data Requirements</h3>
+      <div class="field-grid">
+        <div class="field-item">
+          <label>Standard Objects Used</label>
+          {{DATA_STANDARD_OBJECTS}}
+        </div>
+        <div class="field-item">
+          <label>Custom Objects Required</label>
+          {{DATA_CUSTOM_OBJECTS}}
+        </div>
+        <div class="field-item">
+          <label>Data Sync Strategy</label>
+          {{DATA_SYNC_STRATEGY}}
+        </div>
+        <div class="field-item">
+          <label>Data Volume Considerations</label>
+          {{DATA_VOLUME}}
+        </div>
+      </div>
+
+      <!-- UI Requirements -->
+      <h3 class="subsection-title">UI Requirements</h3>
+      <div class="field-grid">
+        <div class="field-item">
+          <label>UI Approach</label>
+          {{UI_APPROACH}}
+        </div>
+        <div class="field-item">
+          <label>Key Screens / Components</label>
+          {{UI_SCREENS}}
+        </div>
+      </div>
+
+    </section>
+
+    <!-- ---------------------------------------------------------------
+         5. DEPENDENCIES & BLOCKERS
+    --------------------------------------------------------------- -->
+    <section class="section">
+      <h2 class="section-title">Dependencies &amp; Blockers</h2>
+
+      <!-- Salesforce Dependencies -->
+      <h3 class="subsection-title">Salesforce Dependencies</h3>
+      <table class="styled-table">
+        <thead>
+          <tr>
+            <th>Dependency</th>
+            <th>Type</th>
+            <th>Customer Must Have</th>
+            <th>Status</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>{{SF_DEP_1}}</td>
+            <td>License</td>
+            <td>Yes</td>
+            <td>{{SF_DEP_1_STATUS}}</td>
+          </tr>
+          <tr>
+            <td>{{SF_DEP_2}}</td>
+            <td>License</td>
+            <td>Yes</td>
+            <td>{{SF_DEP_2_STATUS}}</td>
+          </tr>
+          <tr>
+            <td>{{SF_DEP_3}}</td>
+            <td>Configuration</td>
+            <td>{{SF_DEP_3_REQUIRED}}</td>
+            <td>{{SF_DEP_3_STATUS}}</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <!-- External Dependencies -->
+      <h3 class="subsection-title">External Dependencies</h3>
+      <table class="styled-table">
+        <thead>
+          <tr>
+            <th>System / Party</th>
+            <th>Dependency Type</th>
+            <th>Risk</th>
+            <th>Owner</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>{{EXT_DEP_1}}</td>
+            <td>{{EXT_DEP_1_TYPE}}</td>
+            <td><span class="{{EXT_DEP_1_RISK_CLASS}}">{{EXT_DEP_1_RISK}}</span></td>
+            <td>{{EXT_DEP_1_OWNER}}</td>
+          </tr>
+          <tr>
+            <td>{{EXT_DEP_2}}</td>
+            <td>{{EXT_DEP_2_TYPE}}</td>
+            <td><span class="{{EXT_DEP_2_RISK_CLASS}}">{{EXT_DEP_2_RISK}}</span></td>
+            <td>{{EXT_DEP_2_OWNER}}</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <!-- Open Blockers -->
+      <h3 class="subsection-title">Open Blockers</h3>
+      <ul class="checklist">
+        <li>
+          <span class="check-box"></span>
+          <span>
+            <strong>{{BLOCKER_1}}</strong>
+            <span class="blocker-owner">— Owner: {{BLOCKER_1_OWNER}} — Target: {{BLOCKER_1_DATE}}</span>
+          </span>
+        </li>
+        <li>
+          <span class="check-box"></span>
+          <span>
+            <strong>{{BLOCKER_2}}</strong>
+            <span class="blocker-owner">— Owner: {{BLOCKER_2_OWNER}} — Target: {{BLOCKER_2_DATE}}</span>
+          </span>
+        </li>
+      </ul>
+
+    </section>
+
+    <!-- ---------------------------------------------------------------
+         6. RISKS
+    --------------------------------------------------------------- -->
+    <section class="section">
+      <h2 class="section-title">Risks</h2>
+
+      <table class="styled-table">
+        <thead>
+          <tr>
+            <th>Risk</th>
+            <th>Source</th>
+            <th>Likelihood</th>
+            <th>Impact</th>
+            <th>Mitigation</th>
+            <th>Owner</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>{{RISK_1}}</td>
+            <td><span class="source-tag">{{RISK_1_SOURCE}}</span></td>
+            <td><span class="{{RISK_1_LIKELIHOOD_CLASS}}">{{RISK_1_LIKELIHOOD}}</span></td>
+            <td><span class="{{RISK_1_IMPACT_CLASS}}">{{RISK_1_IMPACT}}</span></td>
+            <td>{{RISK_1_MITIGATION}}</td>
+            <td>{{RISK_1_OWNER}}</td>
+          </tr>
+          <tr>
+            <td>{{RISK_2}}</td>
+            <td><span class="source-tag">{{RISK_2_SOURCE}}</span></td>
+            <td><span class="{{RISK_2_LIKELIHOOD_CLASS}}">{{RISK_2_LIKELIHOOD}}</span></td>
+            <td><span class="{{RISK_2_IMPACT_CLASS}}">{{RISK_2_IMPACT}}</span></td>
+            <td>{{RISK_2_MITIGATION}}</td>
+            <td>{{RISK_2_OWNER}}</td>
+          </tr>
+          <tr>
+            <td>{{RISK_3}}</td>
+            <td><span class="source-tag">{{RISK_3_SOURCE}}</span></td>
+            <td class="{{RISK_3_LIKELIHOOD_CLASS}}">{{RISK_3_LIKELIHOOD}}</td>
+            <td class="{{RISK_3_IMPACT_CLASS}}">{{RISK_3_IMPACT}}</td>
+            <td>{{RISK_3_MITIGATION}}</td>
+            <td>{{RISK_3_OWNER}}</td>
+          </tr>
+        </tbody>
+      </table>
+      <div class="field-block" style="margin-top:16px;">
+        <div class="field-label">Competitive Positioning Note</div>
+        <div class="field-value">{{COMPETITIVE_POSITIONING_NOTE}}</div>
+      </div>
+    </section>
+
+    <!-- ---------------------------------------------------------------
+         7. PHASE PLAN
+    --------------------------------------------------------------- -->
+    <section class="section">
+      <h2 class="section-title">Phase Plan</h2>
+
+      <table class="styled-table">
+        <thead>
+          <tr>
+            <th>Phase</th>
+            <th>Scope Summary</th>
+            <th>Key Features</th>
+            <th>Target Timeframe</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><span class="badge badge-mvp">MVP</span></td>
+            <td>{{MVP_SCOPE}}</td>
+            <td>{{MVP_FEATURES}}</td>
+            <td>{{MVP_TARGET}}</td>
+          </tr>
+          <tr>
+            <td><span class="badge badge-h1">H1</span></td>
+            <td>{{H1_SCOPE}}</td>
+            <td>{{H1_FEATURES}}</td>
+            <td>{{H1_TARGET}}</td>
+          </tr>
+          <tr>
+            <td><span class="badge badge-h2">H2</span></td>
+            <td>{{H2_SCOPE}}</td>
+            <td>{{H2_FEATURES}}</td>
+            <td>{{H2_TARGET}}</td>
+          </tr>
+          <tr>
+            <td><span class="badge badge-h3">H3</span></td>
+            <td>{{H3_SCOPE}}</td>
+            <td>{{H3_FEATURES}}</td>
+            <td>{{H3_TARGET}}</td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+
+    <!-- ---------------------------------------------------------------
+         8. COMMERCIAL CONTEXT
+    --------------------------------------------------------------- -->
+    <section class="section">
+      <h2 class="section-title">Commercial Context</h2>
+
+      <div class="detail-row">
+        <strong>App Type</strong>
+        <span>{{COMMERCIAL_APP_TYPE}}</span>
+      </div>
+      <div class="detail-row">
+        <strong>Licensing Model</strong>
+        <span>{{LICENSING_MODEL}}</span>
+      </div>
+      <div class="detail-row">
+        <strong>Primary GTM Motion</strong>
+        <span>{{GTM_MOTION}}</span>
+      </div>
+
+      <h4 style="margin: 20px 0 10px; font-size: 0.82rem; color: #032d60;">Pull-Through Opportunity</h4>
+      <table class="styled-table" style="margin-bottom: 20px;">
+        <thead>
+          <tr>
+            <th>Salesforce SKU</th>
+            <th>Pull-Through Trigger</th>
+            <th>Est. ACV Impact</th>
+            <th>Timeline</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>{{PT_SKU_1}}</strong></td>
+            <td>{{PT_SKU_1_TRIGGER}}</td>
+            <td>{{PT_SKU_1_ACV}}</td>
+            <td>{{PT_SKU_1_TIMELINE}}</td>
+          </tr>
+          <tr>
+            <td><strong>{{PT_SKU_2}}</strong></td>
+            <td>{{PT_SKU_2_TRIGGER}}</td>
+            <td>{{PT_SKU_2_ACV}}</td>
+            <td>{{PT_SKU_2_TIMELINE}}</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <h4 style="margin: 0 0 10px; font-size: 0.82rem; color: #032d60;">Sales Activation Plan</h4>
+      <table class="styled-table">
+        <thead>
+          <tr>
+            <th>Activation Asset</th>
+            <th>Status</th>
+            <th>Owner</th>
+            <th>Target Date</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>PADA signed — revenue share % defined</td>
+            <td>{{PADA_STATUS}}</td>
+            <td>{{PADA_OWNER}}</td>
+            <td>{{PADA_DATE}}</td>
+          </tr>
+          <tr>
+            <td>AE one-pager complete</td>
+            <td>{{AE_ONEPAGER_STATUS}}</td>
+            <td>{{AE_ONEPAGER_OWNER}}</td>
+            <td>{{AE_ONEPAGER_DATE}}</td>
+          </tr>
+          <tr>
+            <td>Deal registration enabled in Partner Community</td>
+            <td>{{DEAL_REG_STATUS}}</td>
+            <td>{{DEAL_REG_OWNER}}</td>
+            <td>{{DEAL_REG_DATE}}</td>
+          </tr>
+          <tr>
+            <td>SPIFF structure confirmed with PAM</td>
+            <td>{{SPIFF_STATUS}}</td>
+            <td>{{SPIFF_OWNER}}</td>
+            <td>{{SPIFF_DATE}}</td>
+          </tr>
+          <tr>
+            <td>Partner sellers trained on co-sell process</td>
+            <td>{{SELLER_TRAINING_STATUS}}</td>
+            <td>{{SELLER_TRAINING_OWNER}}</td>
+            <td>{{SELLER_TRAINING_DATE}}</td>
+          </tr>
+          <tr>
+            <td>Target AE list + account overlap identified</td>
+            <td>{{ACCOUNT_OVERLAP_STATUS}}</td>
+            <td>{{ACCOUNT_OVERLAP_OWNER}}</td>
+            <td>{{ACCOUNT_OVERLAP_DATE}}</td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+
+    <!-- ---------------------------------------------------------------
+         9. PROGRAM ALIGNMENT
+    --------------------------------------------------------------- -->
+    <section class="section">
+      <h2 class="section-title">Program Alignment</h2>
+
+      <div class="detail-row">
+        <strong>Salesforce Blueprint Gap(s) Addressed</strong>
+        <span>{{BLUEPRINT_GAP}}</span>
+      </div>
+      <div class="detail-row">
+        <strong>Sales Play Alignment</strong>
+        <span>{{SALES_PLAY}}</span>
+      </div>
+      <div class="detail-row">
+        <strong>Salesforce Stakeholder Needs</strong>
+        <span>{{STAKEHOLDER_NEEDS}}</span>
+      </div>
+    </section>
+
+    <!-- ---------------------------------------------------------------
+         10. INDUSTRY ALIGNMENT
+    --------------------------------------------------------------- -->
+    <section class="section">
+      <h2 class="section-title">Industry Alignment</h2>
+
+      <div class="detail-row">
+        <strong>Target Vertical</strong>
+        <span>{{INDUSTRY_VERTICAL}}</span>
+      </div>
+      <div class="detail-row">
+        <strong>Salesforce Industry Cloud</strong>
+        <span>{{INDUSTRY_CLOUD}}</span>
+      </div>
+      <div class="detail-row">
+        <strong>Industry Blueprint Gap</strong>
+        <span>{{INDUSTRY_BLUEPRINT_GAP}}</span>
+      </div>
+
+      <h4 style="margin: 20px 0 10px; font-size: 0.82rem; color: #032d60;">Market Context</h4>
+      <table class="styled-table" style="margin-bottom: 20px;">
+        <thead>
+          <tr>
+            <th>Dimension</th>
+            <th>Detail</th>
+            <th>Source</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>Market Size</strong></td>
+            <td>{{MARKET_SIZE}}</td>
+            <td>{{MARKET_SIZE_SOURCE}}</td>
+          </tr>
+          <tr>
+            <td><strong>Growth Rate (CAGR)</strong></td>
+            <td>{{MARKET_CAGR}}</td>
+            <td>{{MARKET_CAGR_SOURCE}}</td>
+          </tr>
+          <tr>
+            <td><strong>Problem Cost</strong></td>
+            <td>{{MARKET_PROBLEM_COST}}</td>
+            <td>{{MARKET_PROBLEM_COST_SOURCE}}</td>
+          </tr>
+          <tr>
+            <td><strong>Regulatory Driver</strong></td>
+            <td>{{REGULATORY_DRIVER}}</td>
+            <td>{{REGULATORY_SOURCE}}</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <h4 style="margin: 0 0 10px; font-size: 0.82rem; color: #032d60;">Focus Areas &amp; Aligned Use Cases</h4>
+      <table class="styled-table" style="margin-bottom: 14px;">
+        <thead>
+          <tr>
+            <th>Focus Area</th>
+            <th>Industry Priority</th>
+            <th>This Solution's Use Case</th>
+            <th>Strategic Fit</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>{{FOCUS_AREA_1}}</strong></td>
+            <td>{{FOCUS_AREA_1_PRIORITY}}</td>
+            <td>{{FOCUS_AREA_1_USE_CASE}}</td>
+            <td>{{FOCUS_AREA_1_FIT}}</td>
+          </tr>
+          <tr>
+            <td><strong>{{FOCUS_AREA_2}}</strong></td>
+            <td>{{FOCUS_AREA_2_PRIORITY}}</td>
+            <td>{{FOCUS_AREA_2_USE_CASE}}</td>
+            <td>{{FOCUS_AREA_2_FIT}}</td>
+          </tr>
+          <tr>
+            <td><strong>{{FOCUS_AREA_3}}</strong></td>
+            <td>{{FOCUS_AREA_3_PRIORITY}}</td>
+            <td>{{FOCUS_AREA_3_USE_CASE}}</td>
+            <td>{{FOCUS_AREA_3_FIT}}</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <div class="field-block">
+        <div class="field-label">Positioning Note</div>
+        <div class="field-value">{{INDUSTRY_POSITIONING_NOTE}}</div>
+      </div>
+    </section>
+
+    <!-- ---------------------------------------------------------------
+         11. SUCCESS METRICS
+    --------------------------------------------------------------- -->
+    <section class="section">
+      <h2 class="section-title">Success Metrics</h2>
+
+      <table class="styled-table">
+        <thead>
+          <tr>
+            <th>KPI</th>
+            <th>Target</th>
+            <th>How Measured</th>
+            <th>Phase</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>{{KPI_1}}</td>
+            <td>{{KPI_1_TARGET}}</td>
+            <td>{{KPI_1_METHOD}}</td>
+            <td><span class="badge badge-mvp">MVP</span></td>
+          </tr>
+          <tr>
+            <td>{{KPI_2}}</td>
+            <td>{{KPI_2_TARGET}}</td>
+            <td>{{KPI_2_METHOD}}</td>
+            <td><span class="badge badge-mvp">MVP</span></td>
+          </tr>
+          <tr>
+            <td>{{KPI_3}}</td>
+            <td>{{KPI_3_TARGET}}</td>
+            <td>{{KPI_3_METHOD}}</td>
+            <td><span class="badge badge-h1">H1</span></td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+
+    <!-- ---------------------------------------------------------------
+         11. CONFIDENCE & OPEN ITEMS
+    --------------------------------------------------------------- -->
+    <section class="section">
+      <h2 class="section-title">Confidence &amp; Open Items</h2>
+
+      <div class="confidence-band">
+        <div>
+          <div class="confidence-label">Confidence Score</div>
+          <div class="confidence-score">{{CONFIDENCE_SCORE}}</div>
+        </div>
+        <div class="confidence-desc">
+          Score reflects completeness of REQUIRED sections and degree of technical confirmation by the engineering team.
+          Range 0.0–1.0.
+        </div>
+      </div>
+
+      <h3 class="subsection-title">Assumptions This Plan Rests On</h3>
+      <ol class="numbered-list">
+        <li>{{ASSUMPTION_1}}</li>
+        <li>{{ASSUMPTION_2}}</li>
+      </ol>
+
+      <h3 class="subsection-title" style="margin-top:18px;">Open Items (TBD)</h3>
+      <ul class="checklist">
+        <li>
+          <span class="check-box"></span>
+          <span>{{OPEN_ITEM_1}}</span>
+        </li>
+        <li>
+          <span class="check-box"></span>
+          <span>{{OPEN_ITEM_2}}</span>
+        </li>
+      </ul>
+
+    </section>
+
+    <!-- ---------------------------------------------------------------
+         12. NEXT STEPS & DECISIONS REQUIRED
+    --------------------------------------------------------------- -->
+    <section class="section">
+      <h2 class="section-title">Next Steps &amp; Decisions Required</h2>
+      <p class="section-source">What must happen before the MVP build can be green-lit or the next OG Tech Strategy Framework milestone reached.</p>
+      <table class="styled-table">
+        <thead>
+          <tr>
+            <th>Action</th>
+            <th>Owner</th>
+            <th>Target Date</th>
+            <th>Status</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>{{NEXT_STEP_1}}</td>
+            <td>{{NEXT_STEP_1_OWNER}}</td>
+            <td>{{NEXT_STEP_1_DATE}}</td>
+            <td>{{NEXT_STEP_1_STATUS}}</td>
+          </tr>
+          <tr>
+            <td>{{NEXT_STEP_2}}</td>
+            <td>{{NEXT_STEP_2_OWNER}}</td>
+            <td>{{NEXT_STEP_2_DATE}}</td>
+            <td>{{NEXT_STEP_2_STATUS}}</td>
+          </tr>
+          <tr>
+            <td>{{NEXT_STEP_3}}</td>
+            <td>{{NEXT_STEP_3_OWNER}}</td>
+            <td>{{NEXT_STEP_3_DATE}}</td>
+            <td>{{NEXT_STEP_3_STATUS}}</td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+
+  </main><!-- /content -->
+
+  <!-- ===================================================================
+       FOOTER
+  ==================================================================== -->
+  <footer class="doc-footer">
+    Generated by pov-builder skill | {{BUILD_PLAN_DATE}}
+  </footer>
+
+</div><!-- /page-wrapper -->
+
+</body>
+</html>

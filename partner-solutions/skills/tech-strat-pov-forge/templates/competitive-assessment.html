@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>{{PARTNER_NAME}} — Competitive Assessment</title>
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: "Salesforce Sans","Helvetica Neue",Helvetica,Arial,sans-serif; font-size: 15px; line-height: 1.6; color: #1a1a1a; background: #f4f6fb; }
+  .page-wrapper { max-width: 1000px; margin: 32px auto; background: #fff; border-radius: 8px; box-shadow: 0 2px 16px rgba(3,45,96,0.10); overflow: hidden; }
+  .doc-header { background: #032d60; color: #fff; padding: 32px 44px 26px; }
+  .doc-header .eyebrow { font-size: 13px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.08em; color: #7db8f7; margin-bottom: 6px; }
+  .doc-header h1 { font-size: 26px; font-weight: 700; margin-bottom: 12px; }
+  .doc-meta { font-size: 12.5px; color: #cfe2fb; }
+  .content { padding: 32px 44px 48px; }
+  .content h2 { font-size: 19px; color: #032d60; margin: 30px 0 12px; padding-bottom: 6px; border-bottom: 2px solid #0176d3; }
+  .content h3 { font-size: 15px; color: #032d60; margin: 20px 0 6px; }
+  .scope-note { background: #eef4fc; border-left: 4px solid #0176d3; padding: 10px 14px; font-size: 13px; color: #444444; margin-bottom: 8px; border-radius: 0 4px 4px 0; }
+  table { width: 100%; border-collapse: separate; border-spacing: 0; font-size: 13.5px; margin: 0 0 18px; border: 1px solid #d8e0ec; border-radius: 6px; overflow: hidden; }
+  thead tr { background: #032d60; color: #fff; }
+  thead th { padding: 9px 13px; text-align: left; font-size: 12px; text-transform: uppercase; letter-spacing: 0.05em; }
+  tbody tr:nth-child(even) { background: #f0f5ff; }
+  tbody td { padding: 8px 13px; border-bottom: 1px solid #e8edf5; vertical-align: top; }
+  .dim-block { border: 1px solid #d8e0ec; border-radius: 6px; padding: 14px 16px; margin-bottom: 14px; background: #fbfdff; }
+  .dim-block .lbl { font-weight: 700; color: #0176d3; font-size: 11px; text-transform: uppercase; letter-spacing: 0.05em; }
+  .concession { background: #fff8ec; border-left: 4px solid #e6a700; padding: 8px 12px; font-size: 13px; margin-top: 8px; border-radius: 0 4px 4px 0; }
+  .footer-note { font-size: 12px; color: #444444; border-top: 1px solid #e0e6f0; padding-top: 14px; margin-top: 8px; }
+  @media print { body { background: #fff; } .page-wrapper { box-shadow: none; border-radius: 0; margin: 0; max-width: 100%; } }
+</style>
+</head>
+<body>
+<!-- Home-page back-link. Fill the HOME_HREF token in the anchor below with {SLUG}-index.html when part of a package; remove this entire <a> line for a standalone artifact (no home page). The token is intentionally not repeated in this comment so a plain string-replace fills only the anchor. -->
+<a href="{{HOME_HREF}}" style="position:fixed;top:14px;left:14px;z-index:9999;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;font-size:12px;font-weight:700;letter-spacing:0.04em;text-decoration:none;color:#fff;background:#0176d3;padding:7px 14px;border-radius:100px;box-shadow:0 2px 8px rgba(0,0,0,0.25);">&#8592; All artifacts</a>
+<div class="page-wrapper">
+  <header class="doc-header">
+    <div class="eyebrow">Salesforce ISV Partner · Competitive Assessment</div>
+    <h1>{{PARTNER_NAME}}</h1>
+    <div class="doc-meta">{{GENERATED_DATE}} · {{OPPORTUNITY_STAGE}} · Built on Salesforce</div>
+  </header>
+  <main class="content">
+    <div class="scope-note">Salesforce vs. app/low-code platforms, hyperscalers, and AI providers across four dimensions and two layers (partner platform choice + customer solution choice). Solution risk &rarr; Red Team Assessment (Stage 9); Flex Credit sizing &rarr; sf-flex-estimator skill; partner pull-through economics &rarr; POV ISV Commercial Model.</div>
+
+    <h2>How to read this</h2>
+{{FRAMING_HTML}}
+
+    <h2>Dimensions</h2>
+{{DIMENSION_BLOCKS}}
+
+    <h2>Synthesis</h2>
+{{SYNTHESIS_HTML}}
+
+    <div class="footer-note">The Red Team Assessment (Stage 9) attacks this partner's solution; this artifact compares platforms. Use the sf-flex-estimator skill for Flex Credit dollar sizing — comparisons here are qualitative.</div>
+  </main>
+</div>
+
+<!-- =====================================================================
+     TOKEN REFERENCE — every token used in this template (fill all).
+     Names are written WITHOUT braces here so each literal token name appears
+     exactly once in this file — a plain string-replace must not double-fill a
+     glossary copy (see refs/html-output-method.md).
+     PARTNER_NAME · GENERATED_DATE · OPPORTUNITY_STAGE · HOME_HREF
+     FRAMING_HTML — the "How to read this" two-layer intro (one or more <p>)
+     DIMENSION_BLOCKS — one <div class="dim-block">...</div> per dimension
+       (Commercial, Ecosystem, GTM Program, Technology). Each block contains:
+       a scorecard <table> (Salesforce + 3 categories, Rating + Rationale),
+       a "Two-layer read" pair (partner / customer),
+       an "Objection -> Response" pair,
+       and a <div class="concession">...</div> naming where a competitor wins.
+     SYNTHESIS_HTML — strongest arguments, objections likely to land, and the
+       honest "where Salesforce is not the right choice" line.
+===================================================================== -->
+</body>
+</html>

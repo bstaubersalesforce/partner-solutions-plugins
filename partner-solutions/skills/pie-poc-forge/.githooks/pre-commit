@@ -1,0 +1,16 @@
+#!/bin/sh
+# pie-poc-forge pre-commit hook — runs the skill validation suite.
+# Activate once per clone with: git config core.hooksPath .githooks
+root="$(git rev-parse --show-toplevel)"
+if ! command -v python3 >/dev/null 2>&1; then
+  echo "pre-commit: python3 not found — cannot run skill validation." >&2
+  exit 1
+fi
+python3 "$root/tests/validate_skill.py"
+status=$?
+if [ "$status" -ne 0 ]; then
+  echo "" >&2
+  echo "pre-commit: skill validation FAILED — commit aborted." >&2
+  echo "Fix the checks above, or bypass with: git commit --no-verify" >&2
+fi
+exit "$status"

@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>{{TITLE}} — Executive Overview</title>
+<style>
+ :root{ --navy:#032D60; --blue:#0176d3; --teal:#0B827C; --ground:#0f1117; --panel:#161a22;
+        --white:#ffffff; --muted:rgba(255,255,255,0.62); --divider:rgba(255,255,255,0.10); }
+ *{box-sizing:border-box;margin:0;padding:0;}
+ body{font-family:'Salesforce Sans',-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Helvetica,Arial,sans-serif;
+      background:var(--ground);color:var(--white);min-height:100vh;}
+ .poster{max-width:1280px;margin:0 auto;}
+ .top-bar{height:6px;background:linear-gradient(90deg,var(--navy),var(--blue),#6bb7ff,var(--teal));}
+ .header{padding:36px 56px 30px;background:var(--navy);border-bottom:1px solid var(--divider);}
+ .eyebrow{font-size:12px;font-weight:800;letter-spacing:0.18em;text-transform:uppercase;color:#9ec7f0;}
+ .header h1{font-size:40px;font-weight:900;letter-spacing:-0.02em;margin:10px 0 0;line-height:1.05;}
+ .header .sub{font-size:15px;color:var(--muted);margin-top:10px;}
+ .header .meta{font-size:12px;color:#9ec7f0;margin-top:14px;}
+ .header .meta a{color:#9ec7f0;text-decoration:none;}
+ .grid{display:grid;grid-template-columns:repeat(6,1fr);gap:1px;background:var(--divider);}
+ .panel{background:var(--panel);padding:30px 34px;min-height:200px;}
+ .panel.c3{grid-column:span 3;} .panel.c6{grid-column:span 6;}
+ .label{font-size:11px;font-weight:800;letter-spacing:0.18em;text-transform:uppercase;
+        display:flex;align-items:center;gap:10px;color:var(--blue);margin-bottom:14px;}
+ .label::before{content:'';display:block;width:30px;height:3px;border-radius:2px;background:var(--blue);}
+ .panel.accent-teal .label{color:#2dd4bf;} .panel.accent-teal .label::before{background:var(--teal);}
+ .panel.accent-amber .label{color:#fbbf24;} .panel.accent-amber .label::before{background:#f59e0b;}
+ .panel.accent-sky .label{color:#7dd3fc;} .panel.accent-sky .label::before{background:#38bdf8;}
+ .panel.accent-red .label{color:#f87171;} .panel.accent-red .label::before{background:#dc2626;}
+ .panel.accent-green .label{color:#4ade80;} .panel.accent-green .label::before{background:#16a34a;}
+ .body{font-size:15px;line-height:1.6;color:rgba(255,255,255,0.88);}
+ .body p{margin:0 0 12px;} .body p:last-child{margin-bottom:0;}
+ .body ul{margin:0 0 12px;padding-left:20px;} .body li{margin-bottom:6px;}
+ .body strong{color:#fff;font-weight:700;} .body em{color:var(--muted);font-style:italic;}
+ .body a{color:#7dd3fc;}
+ @media print{*{print-color-adjust:exact;-webkit-print-color-adjust:exact;}}
+</style></head>
+<body>
+<div class="poster">
+ <div class="top-bar"></div>
+ <header class="header">
+   <div class="eyebrow">{{LABEL}} · {{RELEASE}}</div>
+   <h1>{{TITLE}}</h1>
+   <div class="sub">Executive &amp; Solution Overview</div>
+   <div class="meta">Generated {{GENERATED_DATE}} · <a href="{{HOME_HREF}}">← All artifacts</a></div>
+ </header>
+ <div class="grid">
+   <section class="panel c3"><div class="label">Vision</div><div class="body">{{PANEL_VISION}}</div></section>
+   <section class="panel c3 accent-red"><div class="label">The Problem</div><div class="body">{{PANEL_PROBLEM}}</div></section>
+   <section class="panel c6 accent-sky"><div class="label">The Solution</div><div class="body">{{PANEL_SOLUTION}}</div></section>
+   <section class="panel c3 accent-green"><div class="label">Outcomes</div><div class="body">{{PANEL_OUTCOMES}}</div></section>
+   <section class="panel c3 accent-amber"><div class="label">Market Opportunity · TAM</div><div class="body">{{PANEL_TAM}}</div></section>
+   <section class="panel c3"><div class="label">Ideal Partners</div><div class="body">{{PANEL_IDEAL_PARTNERS}}</div></section>
+   <section class="panel c3 accent-teal"><div class="label">Built on Salesforce</div><div class="body">{{PANEL_BUILT_ON}}</div></section>
+ </div>
+</div>
+</body></html>

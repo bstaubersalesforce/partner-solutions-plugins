@@ -1,0 +1,22 @@
+# Lessons Learned — Full Multi-Surface Workshop
+
+_(author mode fills this)_
+
+## 1. (Fill after first rehearsal)
+
+- Real per-module timings → update FACILITATOR agenda.
+- Any new surface-specific failure mode → add a symptom→fix row.
+- Honesty caveats that must be taught, not hidden.
+- Provisioning pain points.
+- Platform capability changes since the last run.
+
+## 2. (Fill after first delivery)
+
+- What worked / what didn't in the Educate First section.
+- Any new checkpoint failure modes.
+- Commercial / consumption questions that came up repeatedly.
+- Showcase format adjustments.
+
+## 3. (Fill after each subsequent run)
+
+Iterate on the above, tracking patterns across deliveries.

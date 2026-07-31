@@ -1,0 +1,447 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>{{PARTNER_NAME}} — Partner Readiness Scorecard</title>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: "Salesforce Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+      font-size: 15px;
+      line-height: 1.6;
+      color: #1a1a1a;
+      background: #f4f6fb;
+    }
+
+    .page-wrapper {
+      max-width: 1040px;
+      margin: 32px auto;
+      background: #ffffff;
+      border-radius: 8px;
+      box-shadow: 0 2px 16px rgba(3,45,96,0.10);
+      overflow: hidden;
+    }
+
+    /* HEADER BAND */
+    .doc-header {
+      background: #032d60;
+      color: #ffffff;
+      padding: 36px 40px 28px;
+    }
+
+    .doc-header .partner-name {
+      font-size: 13px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: #7db8f7;
+      margin-bottom: 6px;
+    }
+
+    .doc-header h1 {
+      font-size: 26px;
+      font-weight: 700;
+      line-height: 1.2;
+      margin-bottom: 20px;
+    }
+
+    .meta-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+      gap: 12px 24px;
+      font-size: 13px;
+    }
+
+    .meta-item label {
+      display: block;
+      color: #7db8f7;
+      font-size: 11px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.07em;
+      margin-bottom: 2px;
+    }
+
+    .meta-item span { color: #ffffff; font-weight: 500; }
+
+    .stage-badge {
+      display: inline-block;
+      background: #0176d3;
+      color: #ffffff;
+      font-size: 11px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      padding: 2px 9px;
+      border-radius: 12px;
+    }
+
+    /* CONTENT */
+    .content { padding: 36px 40px 48px; }
+
+    .section { margin-bottom: 36px; }
+
+    .section-title {
+      font-size: 17px;
+      font-weight: 700;
+      color: #032d60;
+      border-bottom: 2px solid #0176d3;
+      padding-bottom: 6px;
+      margin-bottom: 18px;
+    }
+
+    /* SNAPSHOT BAND */
+    .snapshot {
+      background: #f0f5ff;
+      border-left: 4px solid #0176d3;
+      border-radius: 4px;
+      padding: 16px 20px;
+      margin-bottom: 24px;
+    }
+
+    .snapshot-stats {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 22px;
+      align-items: center;
+      font-size: 14px;
+      margin-bottom: 10px;
+    }
+
+    .snapshot-stats .stat strong { color: #032d60; }
+
+    .tally { display: inline-flex; gap: 14px; font-weight: 700; }
+    .tally .t-strong { color: #2e7d32; }
+    .tally .t-emerging { color: #e65100; }
+    .tally .t-gap { color: #c62828; }
+
+    .snapshot .gaps-label {
+      font-size: 11px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.07em;
+      color: #444444;
+      margin-bottom: 4px;
+    }
+
+    /* TABLE */
+    .styled-table {
+      width: 100%;
+      border-collapse: separate;
+      border-spacing: 0;
+      font-size: 13.5px;
+      margin-bottom: 10px;
+      border-radius: 6px;
+      overflow: hidden;
+      border: 1px solid #d8e0ec;
+    }
+
+    .styled-table thead tr { background: #032d60; color: #ffffff; }
+
+    .styled-table thead th {
+      padding: 10px 14px;
+      font-size: 12px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      text-align: left;
+    }
+
+    .styled-table tbody tr:nth-child(even) { background: #f0f5ff; }
+    .styled-table tbody tr:nth-child(odd)  { background: #ffffff; }
+
+    .styled-table tbody td {
+      padding: 9px 14px;
+      border-bottom: 1px solid #e8edf5;
+      vertical-align: top;
+    }
+
+    .styled-table tbody tr:last-child td { border-bottom: none; }
+
+    .attr-name { font-weight: 700; color: #032d60; }
+    .col-def { color: #3a3a3a; }
+    .col-notes { color: #3a3a3a; }
+
+    /* RAG STATUS PILLS */
+    .rag {
+      display: inline-block;
+      font-size: 11px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      padding: 3px 10px;
+      border-radius: 12px;
+      white-space: nowrap;
+    }
+    .rag-strong   { background: #2e7d32; color: #ffffff; }
+    .rag-emerging { background: #e65100; color: #ffffff; }
+    .rag-gap      { background: #c62828; color: #ffffff; }
+    .rag-na       { background: #e8edf5; color: #444444; }
+
+    .legend {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 16px;
+      font-size: 12px;
+      color: #444444;
+      margin-top: 6px;
+    }
+    .legend .rag { font-size: 10px; }
+
+    /* CONFIDENCE FOOTER BLOCK */
+    .confidence-band {
+      background: #f8fafd;
+      border: 1px solid #d8e0ec;
+      border-radius: 6px;
+      padding: 16px 20px;
+      font-size: 13.5px;
+    }
+    .confidence-band p { margin-bottom: 6px; }
+    .confidence-band p:last-child { margin-bottom: 0; }
+    .confidence-band strong { color: #032d60; }
+
+    .doc-footer {
+      background: #032d60;
+      color: #7db8f7;
+      font-size: 12px;
+      text-align: center;
+      padding: 14px 40px;
+    }
+
+    @media print {
+      @page { margin: 0.6in; size: letter landscape; }
+      body { background: #ffffff; }
+      .page-wrapper { box-shadow: none; border-radius: 0; margin: 0; max-width: 100%; }
+      .doc-header, .styled-table thead tr, .snapshot, .rag,
+      .confidence-band { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+      .styled-table tbody tr { break-inside: avoid; page-break-inside: avoid; }
+      .doc-footer { background: none; color: #444444; border-top: 1px solid #d8e0ec; }
+    }
+  </style>
+</head>
+<body>
+<!-- Home-page back-link. Fill the HOME_HREF token in the anchor below with {SLUG}-index.html when part of a package; remove this entire <a> line for a standalone artifact (no home page). The token is intentionally not repeated in this comment so a plain string-replace fills only the anchor. -->
+<a href="{{HOME_HREF}}" style="position:fixed;top:14px;left:14px;z-index:9999;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;font-size:12px;font-weight:700;letter-spacing:0.04em;text-decoration:none;color:#fff;background:#0176d3;padding:7px 14px;border-radius:100px;box-shadow:0 2px 8px rgba(0,0,0,0.25);">&#8592; All artifacts</a>
+<div class="page-wrapper">
+
+  <header class="doc-header">
+    <div class="partner-name">{{PARTNER_NAME}}</div>
+    <h1>Partner Readiness Scorecard</h1>
+    <div class="meta-grid">
+      <div class="meta-item">
+        <label>POV Reference</label>
+        <span>{{POV_REFERENCE}}</span>
+      </div>
+      <div class="meta-item">
+        <label>Scorecard Date</label>
+        <span>{{SCORECARD_DATE}}</span>
+      </div>
+      <div class="meta-item">
+        <label>Prepared By</label>
+        <span>{{PREPARED_BY}}</span>
+      </div>
+      <div class="meta-item">
+        <label>Opportunity Stage</label>
+        <span><span class="stage-badge">{{OPPORTUNITY_STAGE}}</span></span>
+      </div>
+    </div>
+  </header>
+
+  <main class="content">
+
+    <!-- READINESS SNAPSHOT -->
+    <section class="section">
+      <h2 class="section-title">Readiness Snapshot</h2>
+      <div class="snapshot">
+        <div class="snapshot-stats">
+          <span class="stat"><strong>Assessed:</strong> {{ASSESSED_COUNT}} of 18</span>
+          <span class="tally">
+            <span class="t-strong">🟢 {{STRONG_COUNT}}</span>
+            <span class="t-emerging">🟡 {{EMERGING_COUNT}}</span>
+            <span class="t-gap">🔴 {{GAP_COUNT}}</span>
+          </span>
+          <span class="stat"><strong>Avg rank (assessed):</strong> {{AVG_RANK}} / 3</span>
+        </div>
+        <div class="gaps-label">Top gaps to close before 03-Contract</div>
+        <div>{{TOP_GAPS}}</div>
+      </div>
+    </section>
+
+    <!-- SCORECARD -->
+    <section class="section">
+      <h2 class="section-title">Scorecard</h2>
+      <table class="styled-table">
+        <colgroup>
+          <col style="width:17%">
+          <col style="width:30%">
+          <col style="width:12%">
+          <col style="width:12%">
+          <col style="width:29%">
+        </colgroup>
+        <thead>
+          <tr>
+            <th>Strategy Attribute</th>
+            <th>Definition</th>
+            <th>Status / Rank</th>
+            <th>Owner</th>
+            <th>Notes / Actions to Close Gap</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="attr-name">Solution Tier</td>
+            <td class="col-def">Priority determined by ISV Sales Lead, Tech Strategy Lead in consultation with other key constituents</td>
+            <td><span class="rag {{A1_STATUS_CLASS}}">{{A1_STATUS}}</span></td>
+            <td>{{A1_OWNER}}</td>
+            <td class="col-notes">{{A1_NOTES}}</td>
+          </tr>
+          <tr>
+            <td class="attr-name">Executive Sponsor</td>
+            <td class="col-def">Identify who is the 'champion' or sponsor for this partner</td>
+            <td><span class="rag {{A2_STATUS_CLASS}}">{{A2_STATUS}}</span></td>
+            <td>{{A2_OWNER}}</td>
+            <td class="col-notes">{{A2_NOTES}}</td>
+          </tr>
+          <tr>
+            <td class="attr-name">Sales Fit (Sales Team Preference)</td>
+            <td class="col-def">Customers willing to purchase the solution and there is real TAM for the solution</td>
+            <td><span class="rag {{A3_STATUS_CLASS}}">{{A3_STATUS}}</span></td>
+            <td>{{A3_OWNER}}</td>
+            <td class="col-notes">{{A3_NOTES}}</td>
+          </tr>
+          <tr>
+            <td class="attr-name">Sales ACV Potential</td>
+            <td class="col-def">The solution has the ability to generate pull-through and additional SKU sales</td>
+            <td><span class="rag {{A4_STATUS_CLASS}}">{{A4_STATUS}}</span></td>
+            <td>{{A4_OWNER}}</td>
+            <td class="col-notes">{{A4_NOTES}}</td>
+          </tr>
+          <tr>
+            <td class="attr-name">Commercial Model - ACV / PNR Potential</td>
+            <td class="col-def">The solution has the potential to generate ISV/OEM ACV</td>
+            <td><span class="rag {{A5_STATUS_CLASS}}">{{A5_STATUS}}</span></td>
+            <td>{{A5_OWNER}}</td>
+            <td class="col-notes">{{A5_NOTES}}</td>
+          </tr>
+          <tr>
+            <td class="attr-name">Product Fit (Product Team Preference)</td>
+            <td class="col-def">The solution specifically addresses a needed blueprint capability gap</td>
+            <td><span class="rag {{A6_STATUS_CLASS}}">{{A6_STATUS}}</span></td>
+            <td>{{A6_OWNER}}</td>
+            <td class="col-notes">{{A6_NOTES}}</td>
+          </tr>
+          <tr>
+            <td class="attr-name">Industry Fit (Industry Team Preference)</td>
+            <td class="col-def">The solution provides tangible clinical/industry outcome improvement and aligns to core values</td>
+            <td><span class="rag {{A7_STATUS_CLASS}}">{{A7_STATUS}}</span></td>
+            <td>{{A7_OWNER}}</td>
+            <td class="col-notes">{{A7_NOTES}}</td>
+          </tr>
+          <tr>
+            <td class="attr-name">ISV Team Fit</td>
+            <td class="col-def">The solution is packagable, transactable, has market fit and aligns to our ISV/OEM model</td>
+            <td><span class="rag {{A8_STATUS_CLASS}}">{{A8_STATUS}}</span></td>
+            <td>{{A8_OWNER}}</td>
+            <td class="col-notes">{{A8_NOTES}}</td>
+          </tr>
+          <tr>
+            <td class="attr-name">ISV Tech Alignment</td>
+            <td class="col-def">The solution aligns well to our platform and ISV-specific capabilities</td>
+            <td><span class="rag {{A9_STATUS_CLASS}}">{{A9_STATUS}}</span></td>
+            <td>{{A9_OWNER}}</td>
+            <td class="col-notes">{{A9_NOTES}}</td>
+          </tr>
+          <tr>
+            <td class="attr-name">Executive Alignment Sponsorship</td>
+            <td class="col-def">The solution has both partner and Salesforce executive alignment</td>
+            <td><span class="rag {{A10_STATUS_CLASS}}">{{A10_STATUS}}</span></td>
+            <td>{{A10_OWNER}}</td>
+            <td class="col-notes">{{A10_NOTES}}</td>
+          </tr>
+          <tr>
+            <td class="attr-name">Industry Value Chain Alignment</td>
+            <td class="col-def">The solution is aligned to industry-defined value chain capabilities</td>
+            <td><span class="rag {{A11_STATUS_CLASS}}">{{A11_STATUS}}</span></td>
+            <td>{{A11_OWNER}}</td>
+            <td class="col-notes">{{A11_NOTES}}</td>
+          </tr>
+          <tr>
+            <td class="attr-name">Salesforce Blueprint Alignment</td>
+            <td class="col-def">The solution aligns to at least one capability on a Salesforce Industry Blueprint</td>
+            <td><span class="rag {{A12_STATUS_CLASS}}">{{A12_STATUS}}</span></td>
+            <td>{{A12_OWNER}}</td>
+            <td class="col-notes">{{A12_NOTES}}</td>
+          </tr>
+          <tr>
+            <td class="attr-name">Partner's Ability to Execute</td>
+            <td class="col-def">The partner has existing partnership and/or alliance capabilities within their team</td>
+            <td><span class="rag {{A13_STATUS_CLASS}}">{{A13_STATUS}}</span></td>
+            <td>{{A13_OWNER}}</td>
+            <td class="col-notes">{{A13_NOTES}}</td>
+          </tr>
+          <tr>
+            <td class="attr-name">Partner's Ability to Sell</td>
+            <td class="col-def">The partner's sales leadership is engaged in the partnership effort. The partner has existing partnership and/or channel sales capabilities</td>
+            <td><span class="rag {{A14_STATUS_CLASS}}">{{A14_STATUS}}</span></td>
+            <td>{{A14_OWNER}}</td>
+            <td class="col-notes">{{A14_NOTES}}</td>
+          </tr>
+          <tr>
+            <td class="attr-name">Customer & Target Account Alignment</td>
+            <td class="col-def">The partner shares the same or similar customers as does Salesforce</td>
+            <td><span class="rag {{A15_STATUS_CLASS}}">{{A15_STATUS}}</span></td>
+            <td>{{A15_OWNER}}</td>
+            <td class="col-notes">{{A15_NOTES}}</td>
+          </tr>
+          <tr>
+            <td class="attr-name">Partner's ISV Tooling Readiness</td>
+            <td class="col-def">The partner has been trained and activated on Salesforce partner tools such as the PBO, COA and LMA</td>
+            <td><span class="rag {{A16_STATUS_CLASS}}">{{A16_STATUS}}</span></td>
+            <td>{{A16_OWNER}}</td>
+            <td class="col-notes">{{A16_NOTES}}</td>
+          </tr>
+          <tr>
+            <td class="attr-name">Partner's Technical Engagement</td>
+            <td class="col-def">The partner's lead technical team is engaged in the partnership effort</td>
+            <td><span class="rag {{A17_STATUS_CLASS}}">{{A17_STATUS}}</span></td>
+            <td>{{A17_OWNER}}</td>
+            <td class="col-notes">{{A17_NOTES}}</td>
+          </tr>
+          <tr>
+            <td class="attr-name">Partner's Executive Engagement</td>
+            <td class="col-def">The partner's executives are engaged in the partnership effort</td>
+            <td><span class="rag {{A18_STATUS_CLASS}}">{{A18_STATUS}}</span></td>
+            <td>{{A18_OWNER}}</td>
+            <td class="col-notes">{{A18_NOTES}}</td>
+          </tr>
+        </tbody>
+      </table>
+      <div class="legend">
+        <span><span class="rag rag-strong">Strong · 3</span> clear evidence</span>
+        <span><span class="rag rag-emerging">Emerging · 2</span> partial / in progress</span>
+        <span><span class="rag rag-gap">Gap · 1</span> deficiency to close</span>
+        <span><span class="rag rag-na">—</span> not yet assessed</span>
+      </div>
+    </section>
+
+    <!-- CONFIDENCE -->
+    <section class="section">
+      <h2 class="section-title">Assessment Basis</h2>
+      <div class="confidence-band">
+        <p><strong>Confidence:</strong> {{CONFIDENCE_SCORE}}</p>
+        <p><strong>Assumptions:</strong> {{ASSUMPTIONS}}</p>
+        <p><strong>Not yet assessed:</strong> {{NOT_ASSESSED}}</p>
+      </div>
+    </section>
+
+  </main>
+
+  <footer class="doc-footer">
+    Generated by pov-builder skill | {{SCORECARD_DATE}}
+  </footer>
+
+</div>
+</body>
+</html>

@@ -1,0 +1,20 @@
+name: Validate skill
+
+# Runs the structural validation suite so the skill's invariants are enforced
+# server-side on every push and PR — not just via the local pre-commit hook.
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.x"
+      - name: Run validation suite
+        run: python3 tests/validate_skill.py

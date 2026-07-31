@@ -1,0 +1,6 @@
+# raw/sensitive capture — never commit (cross-customer cases, Slack threads, PII)
+.notes/
+.superpowers/
+.DS_Store
+__pycache__/
+*.pyc

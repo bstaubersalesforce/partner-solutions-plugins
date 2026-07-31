@@ -1,0 +1,308 @@
+release: summer-26
+product_slug: agentforce-healthcare-oem
+parent_sku: Health Cloud EE/UE
+slack_channel: "#help-sell-health-cloud"
+artifacts:
+  00-executive-summary:
+    status: pending
+    confidence: 0.0
+    rationale: ""
+    sources: []
+    placeholders:
+    loops:
+      claim_verification:
+        verdict: ""
+        note: ""
+      completeness:
+        verdict: ""
+        note: ""
+      uncertainty:
+        verdict: ""
+        note: ""
+      partner_lens:
+        verdict: ""
+        note: ""
+    last_generated: ""
+  01-brief:
+    status: drafted
+    confidence: 0.6
+    rationale: ""
+    sources: []
+    placeholders:
+    loops:
+      claim_verification:
+        verdict: ""
+        note: ""
+      completeness:
+        verdict: ""
+        note: ""
+      uncertainty:
+        verdict: ""
+        note: ""
+      partner_lens:
+        verdict: ""
+        note: ""
+    last_generated: ""
+  02-slide-summary:
+    status: pending
+    confidence: 0.0
+    rationale: ""
+    sources: []
+    placeholders:
+    loops:
+      claim_verification:
+        verdict: ""
+        note: ""
+      completeness:
+        verdict: ""
+        note: ""
+      uncertainty:
+        verdict: ""
+        note: ""
+      partner_lens:
+        verdict: ""
+        note: ""
+    last_generated: ""
+  03-internal-enablement:
+    status: pending
+    confidence: 0.0
+    rationale: ""
+    sources: []
+    placeholders:
+    loops:
+      claim_verification:
+        verdict: ""
+        note: ""
+      completeness:
+        verdict: ""
+        note: ""
+      uncertainty:
+        verdict: ""
+        note: ""
+      partner_lens:
+        verdict: ""
+        note: ""
+    last_generated: ""
+  04-internal-faq:
+    status: pending
+    confidence: 0.0
+    rationale: ""
+    sources: []
+    placeholders:
+    loops:
+      claim_verification:
+        verdict: ""
+        note: ""
+      completeness:
+        verdict: ""
+        note: ""
+      uncertainty:
+        verdict: ""
+        note: ""
+      partner_lens:
+        verdict: ""
+        note: ""
+    last_generated: ""
+  05-external-faq:
+    status: pending
+    confidence: 0.0
+    rationale: ""
+    sources: []
+    placeholders:
+    loops:
+      claim_verification:
+        verdict: ""
+        note: ""
+      completeness:
+        verdict: ""
+        note: ""
+      uncertainty:
+        verdict: ""
+        note: ""
+      partner_lens:
+        verdict: ""
+        note: ""
+    last_generated: ""
+  06-license-entitlements:
+    status: pending
+    confidence: 0.0
+    rationale: ""
+    sources: []
+    placeholders:
+    loops:
+      claim_verification:
+        verdict: ""
+        note: ""
+      completeness:
+        verdict: ""
+        note: ""
+      uncertainty:
+        verdict: ""
+        note: ""
+      partner_lens:
+        verdict: ""
+        note: ""
+    last_generated: ""
+  07-addon-tiering:
+    status: pending
+    confidence: 0.0
+    rationale: ""
+    sources: []
+    placeholders:
+    loops:
+      claim_verification:
+        verdict: ""
+        note: ""
+      completeness:
+        verdict: ""
+        note: ""
+      uncertainty:
+        verdict: ""
+        note: ""
+      partner_lens:
+        verdict: ""
+        note: ""
+    last_generated: ""
+  08-setup-guide:
+    status: pending
+    confidence: 0.0
+    rationale: ""
+    sources: []
+    placeholders:
+    loops:
+      claim_verification:
+        verdict: ""
+        note: ""
+      completeness:
+        verdict: ""
+        note: ""
+      uncertainty:
+        verdict: ""
+        note: ""
+      partner_lens:
+        verdict: ""
+        note: ""
+    last_generated: ""
+  09-org-provisioning-validation:
+    status: pending
+    confidence: 0.0
+    rationale: ""
+    sources: []
+    placeholders:
+      - item: Template ID
+        owner: Manish/John
+        next_step: request template ID
+    loops:
+      claim_verification:
+        verdict: ""
+        note: ""
+      completeness:
+        verdict: ""
+        note: ""
+      uncertainty:
+        verdict: ""
+        note: ""
+      partner_lens:
+        verdict: ""
+        note: ""
+    last_generated: ""
+  10-partner-profile-pov:
+    status: pending
+    confidence: 0.0
+    rationale: ""
+    sources: []
+    placeholders:
+    loops:
+      claim_verification:
+        verdict: ""
+        note: ""
+      completeness:
+        verdict: ""
+        note: ""
+      uncertainty:
+        verdict: ""
+        note: ""
+      partner_lens:
+        verdict: ""
+        note: ""
+    last_generated: ""
+  11-solution-infographic:
+    status: pending
+    confidence: 0.0
+    rationale: ""
+    sources: []
+    placeholders:
+    loops:
+      claim_verification:
+        verdict: ""
+        note: ""
+      completeness:
+        verdict: ""
+        note: ""
+      uncertainty:
+        verdict: ""
+        note: ""
+      partner_lens:
+        verdict: ""
+        note: ""
+    last_generated: ""
+  12-marketecture:
+    status: pending
+    confidence: 0.0
+    rationale: ""
+    sources: []
+    placeholders:
+    loops:
+      claim_verification:
+        verdict: ""
+        note: ""
+      completeness:
+        verdict: ""
+        note: ""
+      uncertainty:
+        verdict: ""
+        note: ""
+      partner_lens:
+        verdict: ""
+        note: ""
+    last_generated: ""
+  13-demand-plan:
+    status: pending
+    confidence: 0.0
+    rationale: ""
+    sources: []
+    placeholders:
+    loops:
+      claim_verification:
+        verdict: ""
+        note: ""
+      completeness:
+        verdict: ""
+        note: ""
+      uncertainty:
+        verdict: ""
+        note: ""
+      partner_lens:
+        verdict: ""
+        note: ""
+    last_generated: ""
+  14-exec-infographic:
+    status: pending
+    confidence: 0.0
+    rationale: ""
+    sources: []
+    placeholders:
+    loops:
+      claim_verification:
+        verdict: ""
+        note: ""
+      completeness:
+        verdict: ""
+        note: ""
+      uncertainty:
+        verdict: ""
+        note: ""
+      partner_lens:
+        verdict: ""
+        note: ""
+    last_generated: ""

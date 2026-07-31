@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>{{TITLE}} — Solution Infographic</title>
+<style>
+  :root { --brand:#0176d3; --brand-dark:#014486; --navy:#032d60; --tint:#eef4ff;
+          --panel:#f8fafc; --rule:#e5e5e5; --body:#181818; --white:#fff; }
+  * { box-sizing:border-box; margin:0; padding:0; }
+  body { font-family:'Salesforce Sans','Helvetica Neue',Arial,sans-serif; background:#f4f6f9; color:var(--body); line-height:1.5; }
+  .info { max-width:1180px; margin:0 auto; background:var(--white); }
+  .top-bar { height:6px; background:linear-gradient(90deg,var(--navy),var(--brand),#6bb7ff,#0b827c); }
+  .header { padding:30px 44px; background:var(--navy); color:#fff; display:flex; justify-content:space-between; align-items:flex-end; flex-wrap:wrap; gap:16px; }
+  .header .eyebrow { font-size:11px; font-weight:800; letter-spacing:0.18em; text-transform:uppercase; color:#9ec7f0; }
+  .header h1 { font-size:30px; font-weight:800; margin-top:8px; }
+  .header .meta { font-size:12px; color:#9ec7f0; }
+  .header .meta a { color:#9ec7f0; text-decoration:none; }
+  .cols { display:grid; grid-template-columns:1fr 1.25fr 1fr; }
+  .col { padding:34px 36px; border-right:1px solid var(--rule); }
+  .col:last-child { border-right:none; }
+  .col-label { font-size:11px; font-weight:800; letter-spacing:0.14em; text-transform:uppercase; margin-bottom:14px; display:flex; align-items:center; gap:8px; }
+  .col-label::before { content:''; width:26px; height:3px; border-radius:2px; display:block; }
+  .col-problem .col-label { color:#c62828; } .col-problem .col-label::before { background:#c62828; }
+  .col-solution .col-label { color:var(--brand); } .col-solution .col-label::before { background:var(--brand); }
+  .col-outcomes .col-label { color:#2e7d32; } .col-outcomes .col-label::before { background:#2e7d32; }
+  .col-problem { background:#fdf5f5; } .col-solution { background:var(--tint); } .col-outcomes { background:#f2faf3; }
+  .body { font-size:14px; line-height:1.6; color:#181818; }
+  .body p { margin:0 0 12px; } .body ul { margin:0 0 12px; padding-left:20px; } .body li { margin-bottom:6px; }
+  .body strong { color:var(--navy); } .body a { color:var(--brand); }
+  .footer { display:grid; grid-template-columns:auto 1fr; gap:36px; padding:26px 44px; background:var(--panel); border-top:1px solid var(--rule); }
+  .footer .flabel { font-size:11px; font-weight:800; letter-spacing:0.14em; text-transform:uppercase; color:#444; }
+  .footer .body { font-size:13px; }
+  .built { padding:26px 44px; border-top:1px solid var(--rule); }
+  .built .col-label { color:#0b827c; } .built .col-label::before { background:#0b827c; }
+  /* shared light styled-table (mirror of document-shell / canvas) */
+  table { width:100%; border-collapse:separate; border-spacing:0; border:1px solid var(--rule); border-radius:6px; overflow:hidden; font-size:0.85rem; margin:1rem 0; }
+  th { background:var(--tint); color:var(--navy); text-align:left; padding:9px 12px; font-size:0.72rem; text-transform:uppercase; letter-spacing:0.05em; border-bottom:1px solid var(--rule); }
+  td { padding:9px 12px; border-top:1px solid #eef2f7; vertical-align:top; }
+  tr:nth-child(even) td { background:var(--panel); }
+  @media print { *{ -webkit-print-color-adjust:exact; print-color-adjust:exact; } }
+  @media (max-width:1000px) { .cols { grid-template-columns:1fr; } .col { border-right:none; border-bottom:1px solid var(--rule); } }
+</style>
+</head>
+<body>
+<div class="info">
+  <div class="top-bar"></div>
+  <header class="header">
+    <div>
+      <div class="eyebrow">{{LABEL}} · {{RELEASE}}</div>
+      <h1>{{TITLE}}</h1>
+    </div>
+    <div class="meta">Generated {{GENERATED_DATE}} · <a href="{{HOME_HREF}}">← All artifacts</a></div>
+  </header>
+  <div class="cols">
+    <section class="col col-problem"><div class="col-label">The Problem</div><div class="body">{{PANEL_PROBLEM}}</div></section>
+    <section class="col col-solution"><div class="col-label">The Solution</div><div class="body">{{PANEL_SOLUTION}}</div></section>
+    <section class="col col-outcomes"><div class="col-label">Outcomes</div><div class="body">{{PANEL_OUTCOMES}}</div></section>
+  </div>
+  <section class="built"><div class="col-label">Built on Salesforce</div><div class="body">{{PANEL_BUILT_ON}}</div></section>
+  <footer class="footer">
+    <div class="flabel">Market &amp; who it's for</div>
+    <div class="body">{{PANEL_MARKET}}</div>
+  </footer>
+</div>
+</body>
+</html>

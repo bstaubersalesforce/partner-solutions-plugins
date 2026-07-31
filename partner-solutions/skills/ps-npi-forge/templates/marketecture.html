@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>{{TITLE}} — Solution Marketecture</title>
+<style>
+  :root { --brand:#0176d3; --navy:#032d60; --tint:#eef4ff; --panel:#f8fafc; --rule:#e5e5e5; --body:#181818; }
+  * { box-sizing:border-box; margin:0; padding:0; }
+  body { font-family:'Salesforce Sans','Helvetica Neue',Arial,sans-serif; background:#f4f6f9; color:var(--body); line-height:1.5; }
+  .page { max-width:1000px; margin:0 auto; padding:32px 24px; }
+  .header { background:var(--navy); color:#fff; padding:26px 32px; border-radius:8px; margin-bottom:22px; }
+  .header .eyebrow { font-size:11px; font-weight:800; letter-spacing:0.18em; text-transform:uppercase; color:#9ec7f0; }
+  .header h1 { font-size:26px; font-weight:800; margin-top:6px; }
+  .header .meta { font-size:12px; color:#9ec7f0; margin-top:10px; }
+  .header .meta a { color:#9ec7f0; text-decoration:none; }
+  .story { background:#fff; border:1px solid var(--rule); border-radius:8px; padding:20px 24px; margin-bottom:22px; }
+  .story .lbl { font-size:0.68rem; font-weight:700; text-transform:uppercase; letter-spacing:0.1em; color:#444; margin-bottom:10px; }
+  .story .body { font-size:14px; line-height:1.6; }
+  .stack { display:flex; flex-direction:column; border:1px solid var(--rule); border-radius:8px; overflow:hidden; }
+  .layer { padding:18px 22px; border-bottom:1px solid rgba(255,255,255,0.25); }
+  .layer:last-child { border-bottom:none; }
+  .layer .llabel { font-size:0.66rem; font-weight:800; text-transform:uppercase; letter-spacing:0.1em; margin-bottom:8px; }
+  .layer .body { font-size:13.5px; line-height:1.55; }
+  .layer .body p { margin:0 0 8px; } .layer .body p:last-child { margin:0; }
+  .layer .body strong { font-weight:700; } .layer .body a { color:inherit; text-decoration:underline; }
+  /* Partner (top) = brand; then descending shades to trust (bottom) = teal */
+  .l-partner  { background:var(--tint);   color:var(--navy); } .l-partner .llabel { color:var(--brand); }
+  .l-agent    { background:#0176d3; color:#fff; } .l-agent .llabel { color:#cfe6fb; }
+  .l-platform { background:var(--navy);  color:#fff; } .l-platform .llabel { color:#9ec7f0; }
+  .l-data     { background:#0b5cab; color:#fff; } .l-data .llabel { color:#cfe6fb; }
+  .l-trust    { background:#0b827c; color:#fff; } .l-trust .llabel { color:#bdeae6; }
+  /* shared light styled-table */
+  table { width:100%; border-collapse:separate; border-spacing:0; border:1px solid var(--rule); border-radius:6px; overflow:hidden; font-size:0.85rem; margin:1rem 0; }
+  th { background:var(--tint); color:var(--navy); text-align:left; padding:9px 12px; font-size:0.72rem; text-transform:uppercase; letter-spacing:0.05em; border-bottom:1px solid var(--rule); }
+  td { padding:9px 12px; border-top:1px solid #eef2f7; vertical-align:top; }
+  tr:nth-child(even) td { background:var(--panel); }
+  @media print { *{ -webkit-print-color-adjust:exact; print-color-adjust:exact; } }
+</style>
+</head>
+<body>
+<div class="page">
+  <header class="header">
+    <div class="eyebrow">{{LABEL}} · {{RELEASE}}</div>
+    <h1>{{TITLE}} — Solution Marketecture</h1>
+    <div class="meta">Generated {{GENERATED_DATE}} · <a href="{{HOME_HREF}}">← All artifacts</a></div>
+  </header>
+  <div class="story"><div class="lbl">The architecture story</div><div class="body">{{PANEL_STORY}}</div></div>
+  <div class="stack">
+    <div class="layer l-partner"><div class="llabel">Partner Solution Layer</div><div class="body">{{PANEL_PARTNER}}</div></div>
+    <div class="layer l-agent"><div class="llabel">Agent &amp; Experience Layer</div><div class="body">{{PANEL_AGENT}}</div></div>
+    <div class="layer l-platform"><div class="llabel">Platform Layer</div><div class="body">{{PANEL_PLATFORM}}</div></div>
+    <div class="layer l-data"><div class="llabel">Data &amp; Integration Layer</div><div class="body">{{PANEL_DATA}}</div></div>
+    <div class="layer l-trust"><div class="llabel">Trust &amp; Compliance</div><div class="body">{{PANEL_TRUST}}</div></div>
+  </div>
+</div>
+</body>
+</html>

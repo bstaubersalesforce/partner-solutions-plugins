@@ -1,0 +1,428 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>{{PARTNER_NAME}} × Salesforce — Solution Marketecture</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: 'Salesforce Sans', 'Helvetica Neue', Arial, sans-serif;
+    background: #f4f6f9;
+    color: #032d60;
+    font-size: 14px;
+    line-height: 1.5;
+  }
+  .page { max-width: 980px; margin: 0 auto; padding: 32px 24px; }
+
+  /* ── Header ── */
+  .header {
+    background: #032d60;
+    color: white;
+    padding: 28px 32px;
+    border-radius: 8px;
+    margin-bottom: 24px;
+  }
+  .header h1 { font-size: 1.5rem; font-weight: 700; margin-bottom: 8px; }
+  .header .meta { display: flex; flex-wrap: wrap; gap: 20px; font-size: 0.8rem; opacity: 0.8; }
+  .header .meta span { white-space: nowrap; }
+  .header .meta span::before { content: attr(data-label) ': '; font-weight: 700; opacity: 1; }
+
+  /* ── Section card ── */
+  .section {
+    background: white;
+    border-radius: 8px;
+    padding: 24px;
+    margin-bottom: 20px;
+    border: 1px solid #e5e5e5;
+  }
+  .section-title {
+    font-size: 0.68rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: #444444;
+    margin-bottom: 18px;
+  }
+
+  /* ── Architecture diagram ── */
+  .arch-diagram { display: flex; flex-direction: column; border-radius: 8px; overflow: hidden; border: 1px solid #e5e5e5; }
+
+  .arch-layer { padding: 18px 20px; }
+  .arch-layer-label {
+    font-size: 0.65rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    margin-bottom: 12px;
+  }
+  .arch-components { display: flex; gap: 10px; flex-wrap: wrap; }
+  .arch-component {
+    flex: 1;
+    min-width: 130px;
+    padding: 10px 13px;
+    border-radius: 6px;
+  }
+  .arch-component .comp-name { font-weight: 700; font-size: 0.82rem; margin-bottom: 2px; }
+  .arch-component .comp-desc { font-size: 0.72rem; opacity: 0.85; }
+
+  /* Layer: Users */
+  .layer-user { background: #eaf4ff; }
+  .layer-user .arch-layer-label { color: #0176d3; }
+  .layer-user .arch-component { background: white; border: 1px solid #a8c8f0; color: #032d60; }
+
+  /* Connector */
+  .arch-connector {
+    display: flex; align-items: center; justify-content: center;
+    gap: 10px; padding: 6px 20px;
+    background: #f8fafc; border-top: 1px solid #e5e5e5; border-bottom: 1px solid #e5e5e5;
+    font-size: 0.7rem; color: #444444; font-weight: 600;
+  }
+  .arch-connector::before,
+  .arch-connector::after { content: ''; flex: 1; height: 1px; background: #e5e5e5; }
+
+  /* Layer: Salesforce */
+  .layer-salesforce { background: #032d60; }
+  .layer-salesforce .arch-layer-label { color: #7dc4ff; }
+  .layer-salesforce .arch-component { background: #0176d3; color: white; border: none; }
+
+  /* Layer: ISV */
+  .layer-isv { background: #0c5f5f; }
+  .layer-isv .arch-layer-label { color: #7de8e8; }
+  .layer-isv .arch-component { background: #178080; color: white; border: none; }
+
+  /* Layer: External */
+  .layer-external { background: #f4f6f9; }
+  .layer-external .arch-layer-label { color: #444444; }
+  .layer-external .arch-component { background: white; border: 1px solid #c8d2de; color: #032d60; }
+
+  /* ── Tables ── */
+  .styled-table {
+    width: 100%;
+    border-collapse: separate;
+    border-spacing: 0;
+    border: 1px solid #e5e5e5;
+    border-radius: 6px;
+    overflow: hidden;
+    font-size: 0.82rem;
+  }
+  .styled-table th {
+    background: #032d60;
+    color: white;
+    padding: 10px 12px;
+    text-align: left;
+    font-weight: 600;
+    font-size: 0.7rem;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+  }
+  .styled-table td {
+    padding: 10px 12px;
+    border-top: 1px solid #e8edf5;
+    vertical-align: top;
+  }
+  .styled-table tr:nth-child(even) td { background: #f8fafc; }
+
+  /* ── Badges ── */
+  .badge {
+    display: inline-block;
+    padding: 2px 8px;
+    border-radius: 3px;
+    font-size: 0.68rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    white-space: nowrap;
+  }
+  .badge-sf  { background: #0176d3; color: white; }
+  .badge-isv { background: #0c5f5f; color: white; }
+  .badge-ext { background: #444444; color: white; }
+  .badge-api { background: #6b6bce; color: white; }
+  .risk-h  { color: #c23934; font-weight: 700; }
+  .risk-m  { color: #ca8a04; font-weight: 700; }
+  .risk-l  { color: #2e844a; font-weight: 700; }
+
+  /* ── Notes block ── */
+  .notes-block {
+    background: #f0f5fc;
+    border-left: 3px solid #0176d3;
+    padding: 12px 16px;
+    border-radius: 0 6px 6px 0;
+    font-size: 0.82rem;
+    color: #444444;
+    margin-top: 14px;
+    line-height: 1.6;
+  }
+
+  /* ── Print ── */
+  @media print {
+    @page { margin: 1.5cm; size: A4 landscape; }
+    body { background: white; font-size: 12px; }
+    .section { break-inside: avoid; box-shadow: none; }
+    .arch-layer, .header, .layer-salesforce, .layer-isv {
+      -webkit-print-color-adjust: exact;
+      print-color-adjust: exact;
+    }
+  }
+</style>
+</head>
+<body>
+<!-- Home-page back-link. Fill the HOME_HREF token in the anchor below with {SLUG}-index.html when part of a package; remove this entire <a> line for a standalone artifact (no home page). The token is intentionally not repeated in this comment so a plain string-replace fills only the anchor. -->
+<a href="{{HOME_HREF}}" style="position:fixed;top:14px;left:14px;z-index:9999;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;font-size:12px;font-weight:700;letter-spacing:0.04em;text-decoration:none;color:#fff;background:#0176d3;padding:7px 14px;border-radius:100px;box-shadow:0 2px 8px rgba(0,0,0,0.25);">&#8592; All artifacts</a>
+<div class="page">
+
+  <!-- ── Header ── -->
+  <div class="header">
+    <h1>{{PARTNER_NAME}} × Salesforce — Solution Marketecture</h1>
+    <div class="meta">
+      <span data-label="Solution">{{SOLUTION_NAME}}</span>
+      <span data-label="Type">{{SOLUTION_TYPE}}</span>
+      <span data-label="Vertical">{{VERTICAL}}</span>
+      <span data-label="Date">{{DATE}}</span>
+      <span data-label="POV Reference">{{POV_REFERENCE}}</span>
+    </div>
+  </div>
+
+  <!-- ── Architecture Diagram ── -->
+  <div class="section">
+    <div class="section-title">Architecture Overview</div>
+    <div class="arch-diagram">
+
+      <!-- User layer -->
+      <div class="arch-layer layer-user">
+        <div class="arch-layer-label">User Layer — Who interacts with the solution</div>
+        <div class="arch-components">
+          <div class="arch-component">
+            <div class="comp-name">{{PERSONA_1}}</div>
+            <div class="comp-desc">{{PERSONA_1_INTERACTION}}</div>
+          </div>
+          <div class="arch-component">
+            <div class="comp-name">{{PERSONA_2}}</div>
+            <div class="comp-desc">{{PERSONA_2_INTERACTION}}</div>
+          </div>
+          <div class="arch-component">
+            <div class="comp-name">{{PERSONA_3}}</div>
+            <div class="comp-desc">{{PERSONA_3_INTERACTION}}</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="arch-connector">↕ &nbsp;Salesforce UI / Experience Cloud / Lightning / APIs</div>
+
+      <!-- Salesforce layer -->
+      <div class="arch-layer layer-salesforce">
+        <div class="arch-layer-label">Salesforce Platform</div>
+        <div class="arch-components">
+          <div class="arch-component">
+            <div class="comp-name">{{SF_CLOUD_1}}</div>
+            <div class="comp-desc">{{SF_CLOUD_1_ROLE}}</div>
+          </div>
+          <div class="arch-component">
+            <div class="comp-name">{{SF_CLOUD_2}}</div>
+            <div class="comp-desc">{{SF_CLOUD_2_ROLE}}</div>
+          </div>
+          <div class="arch-component">
+            <div class="comp-name">{{SF_CLOUD_3}}</div>
+            <div class="comp-desc">{{SF_CLOUD_3_ROLE}}</div>
+          </div>
+          <div class="arch-component">
+            <div class="comp-name">{{SF_AI_COMPONENT}}</div>
+            <div class="comp-desc">{{SF_AI_ROLE}}</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="arch-connector">↕ &nbsp;Managed Package APIs / Platform Events / REST / Bulk API</div>
+
+      <!-- ISV layer -->
+      <div class="arch-layer layer-isv">
+        <div class="arch-layer-label">{{PARTNER_NAME}} Solution Layer</div>
+        <div class="arch-components">
+          <div class="arch-component">
+            <div class="comp-name">{{ISV_COMPONENT_1}}</div>
+            <div class="comp-desc">{{ISV_COMPONENT_1_DESC}}</div>
+          </div>
+          <div class="arch-component">
+            <div class="comp-name">{{ISV_COMPONENT_2}}</div>
+            <div class="comp-desc">{{ISV_COMPONENT_2_DESC}}</div>
+          </div>
+          <div class="arch-component">
+            <div class="comp-name">{{ISV_COMPONENT_3}}</div>
+            <div class="comp-desc">{{ISV_COMPONENT_3_DESC}}</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="arch-connector">↕ &nbsp;External Integrations / Webhooks / ETL / MuleSoft</div>
+
+      <!-- External layer -->
+      <div class="arch-layer layer-external">
+        <div class="arch-layer-label">External Systems &amp; Data Sources</div>
+        <div class="arch-components">
+          <div class="arch-component">
+            <div class="comp-name">{{EXT_SYSTEM_1}}</div>
+            <div class="comp-desc">{{EXT_SYSTEM_1_DESC}}</div>
+          </div>
+          <div class="arch-component">
+            <div class="comp-name">{{EXT_SYSTEM_2}}</div>
+            <div class="comp-desc">{{EXT_SYSTEM_2_DESC}}</div>
+          </div>
+          <div class="arch-component">
+            <div class="comp-name">{{EXT_SYSTEM_3}}</div>
+            <div class="comp-desc">{{EXT_SYSTEM_3_DESC}}</div>
+          </div>
+        </div>
+      </div>
+
+    </div><!-- /arch-diagram -->
+  </div>
+
+  <!-- ── Component Inventory ── -->
+  <div class="section">
+    <div class="section-title">Component Inventory</div>
+    <table class="styled-table">
+      <thead>
+        <tr>
+          <th>Component</th>
+          <th>Layer</th>
+          <th>Description</th>
+          <th>Integration Method</th>
+          <th>Owner</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>{{COMP_1_NAME}}</strong></td>
+          <td><span class="badge badge-sf">Salesforce</span></td>
+          <td>{{COMP_1_DESC}}</td>
+          <td>{{COMP_1_INTEGRATION}}</td>
+          <td>Salesforce</td>
+        </tr>
+        <tr>
+          <td><strong>{{COMP_2_NAME}}</strong></td>
+          <td><span class="badge badge-sf">Salesforce</span></td>
+          <td>{{COMP_2_DESC}}</td>
+          <td>{{COMP_2_INTEGRATION}}</td>
+          <td>Salesforce</td>
+        </tr>
+        <tr>
+          <td><strong>{{COMP_3_NAME}}</strong></td>
+          <td><span class="badge badge-isv">ISV</span></td>
+          <td>{{COMP_3_DESC}}</td>
+          <td>{{COMP_3_INTEGRATION}}</td>
+          <td>{{PARTNER_NAME}}</td>
+        </tr>
+        <tr>
+          <td><strong>{{COMP_4_NAME}}</strong></td>
+          <td><span class="badge badge-isv">ISV</span></td>
+          <td>{{COMP_4_DESC}}</td>
+          <td>{{COMP_4_INTEGRATION}}</td>
+          <td>{{PARTNER_NAME}}</td>
+        </tr>
+        <tr>
+          <td><strong>{{COMP_5_NAME}}</strong></td>
+          <td><span class="badge badge-ext">External</span></td>
+          <td>{{COMP_5_DESC}}</td>
+          <td>{{COMP_5_INTEGRATION}}</td>
+          <td>Customer</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- ── Salesforce Platform Requirements ── -->
+  <div class="section">
+    <div class="section-title">Salesforce Platform Requirements</div>
+    <table class="styled-table">
+      <thead>
+        <tr>
+          <th>Cloud / SKU</th>
+          <th>Purpose in Solution</th>
+          <th>Required vs. Optional</th>
+          <th>Notes</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>{{SF_REQ_1_SKU}}</strong></td>
+          <td>{{SF_REQ_1_PURPOSE}}</td>
+          <td>{{SF_REQ_1_REQUIRED}}</td>
+          <td>{{SF_REQ_1_NOTES}}</td>
+        </tr>
+        <tr>
+          <td><strong>{{SF_REQ_2_SKU}}</strong></td>
+          <td>{{SF_REQ_2_PURPOSE}}</td>
+          <td>{{SF_REQ_2_REQUIRED}}</td>
+          <td>{{SF_REQ_2_NOTES}}</td>
+        </tr>
+        <tr>
+          <td><strong>{{SF_REQ_3_SKU}}</strong></td>
+          <td>{{SF_REQ_3_PURPOSE}}</td>
+          <td>{{SF_REQ_3_REQUIRED}}</td>
+          <td>{{SF_REQ_3_NOTES}}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- ── Integration Summary ── -->
+  <div class="section">
+    <div class="section-title">Integration Summary</div>
+    <table class="styled-table">
+      <thead>
+        <tr>
+          <th>System</th>
+          <th>Type</th>
+          <th>Data Flow</th>
+          <th>Auth Method</th>
+          <th>Risk</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>{{INT_1_SYSTEM}}</strong></td>
+          <td><span class="badge badge-api">{{INT_1_TYPE}}</span></td>
+          <td>{{INT_1_FLOW}}</td>
+          <td>{{INT_1_AUTH}}</td>
+          <td class="{{INT_1_RISK_CLASS}}">{{INT_1_RISK}}</td>
+        </tr>
+        <tr>
+          <td><strong>{{INT_2_SYSTEM}}</strong></td>
+          <td><span class="badge badge-api">{{INT_2_TYPE}}</span></td>
+          <td>{{INT_2_FLOW}}</td>
+          <td>{{INT_2_AUTH}}</td>
+          <td class="{{INT_2_RISK_CLASS}}">{{INT_2_RISK}}</td>
+        </tr>
+        <tr>
+          <td><strong>{{INT_3_SYSTEM}}</strong></td>
+          <td><span class="badge badge-api">{{INT_3_TYPE}}</span></td>
+          <td>{{INT_3_FLOW}}</td>
+          <td>{{INT_3_AUTH}}</td>
+          <td class="{{INT_3_RISK_CLASS}}">{{INT_3_RISK}}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- ── Technical Notes ── -->
+  <div class="section">
+    <div class="section-title">Technical Profile</div>
+    <table class="styled-table">
+      <thead>
+        <tr><th>Dimension</th><th>Detail</th></tr>
+      </thead>
+      <tbody>
+        <tr><td><strong>Deployment Model</strong></td><td>{{DEPLOYMENT_MODEL}}</td></tr>
+        <tr><td><strong>Solution Type</strong></td><td>{{SOLUTION_TYPE_DETAIL}}</td></tr>
+        <tr><td><strong>Security Model</strong></td><td>{{SECURITY_MODEL}}</td></tr>
+        <tr><td><strong>Data Residency</strong></td><td>{{DATA_RESIDENCY}}</td></tr>
+        <tr><td><strong>AI / ML Components</strong></td><td>{{AI_ML_NOTES}}</td></tr>
+        <tr><td><strong>Compliance &amp; Certifications</strong></td><td>{{COMPLIANCE_CERTS}}</td></tr>
+        <tr><td><strong>API Call Volume (est.)</strong></td><td>{{API_VOLUME}}</td></tr>
+      </tbody>
+    </table>
+    <div class="notes-block">{{ARCHITECTURE_NOTES}}</div>
+  </div>
+
+</div><!-- /page -->
+</body>
+</html>

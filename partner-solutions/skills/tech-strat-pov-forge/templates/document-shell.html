@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>{{PARTNER_NAME}} — {{DOC_LABEL}}</title>
+  <style>
+    /* Shared shell for rendering a Markdown-native artifact (POV, Red Team)
+       as a styled, viewable HTML page. Convert the artifact's Markdown body
+       to HTML and inject it at the CONTENT placeholder in the main element below.
+       (The placeholder token is intentionally NOT written here — it must appear
+       exactly once in this file so a plain string-replace fills only the body.) */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: "Salesforce Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+      font-size: 15px;
+      line-height: 1.65;
+      color: #1a1a1a;
+      background: #f4f6fb;
+    }
+
+    .page-wrapper {
+      max-width: 880px;
+      margin: 32px auto;
+      background: #ffffff;
+      border-radius: 8px;
+      box-shadow: 0 2px 16px rgba(3,45,96,0.10);
+      overflow: hidden;
+    }
+
+    /* HEADER */
+    .doc-header { background: #032d60; color: #ffffff; padding: 32px 44px 26px; }
+    .doc-header .partner-name {
+      font-size: 13px; font-weight: 600; text-transform: uppercase;
+      letter-spacing: 0.08em; color: #7db8f7; margin-bottom: 6px;
+    }
+    .doc-header h1 { font-size: 25px; font-weight: 700; line-height: 1.2; margin-bottom: 16px; }
+    .doc-meta { display: flex; flex-wrap: wrap; gap: 18px; font-size: 12.5px; color: #cfe2fb; }
+    .doc-meta .stage-badge {
+      display: inline-block; background: #0176d3; color: #fff; font-size: 11px;
+      font-weight: 700; text-transform: uppercase; letter-spacing: 0.06em;
+      padding: 2px 9px; border-radius: 12px;
+    }
+
+    /* RENDERED MARKDOWN CONTENT */
+    .content { padding: 36px 44px 48px; }
+    .content h1, .content h2, .content h3, .content h4 { color: #032d60; line-height: 1.25; }
+    .content h1 { font-size: 23px; margin: 28px 0 12px; }
+    .content h2 {
+      font-size: 19px; margin: 30px 0 12px; padding-bottom: 6px;
+      border-bottom: 2px solid #0176d3;
+    }
+    .content h3 { font-size: 16px; margin: 22px 0 8px; }
+    .content h4 { font-size: 14px; margin: 18px 0 6px; text-transform: uppercase; letter-spacing: 0.05em; color: #444444; }
+    .content p { margin: 0 0 12px; }
+    .content ul, .content ol { margin: 0 0 14px 22px; }
+    .content li { margin-bottom: 5px; }
+    .content a { color: #0176d3; }
+    .content strong { color: #032d60; }
+    .content hr { border: none; border-top: 1px solid #e0e6f0; margin: 26px 0; }
+
+    .content blockquote {
+      background: #f0f5ff; border-left: 4px solid #0176d3;
+      border-radius: 0 4px 4px 0; padding: 12px 18px; margin: 0 0 16px;
+      color: #032d60; font-style: italic;
+    }
+
+    .content code {
+      background: #eef2f8; padding: 1px 6px; border-radius: 4px;
+      font-family: "SF Mono", Menlo, Consolas, monospace; font-size: 0.88em;
+    }
+    .content pre {
+      background: #f6f8fc; border: 1px solid #e0e6f0; border-radius: 6px;
+      padding: 14px 16px; overflow-x: auto; margin: 0 0 16px;
+    }
+    .content pre code { background: none; padding: 0; }
+
+    .content table {
+      width: 100%; border-collapse: separate; border-spacing: 0;
+      font-size: 13.5px; margin: 0 0 18px;
+      border: 1px solid #d8e0ec; border-radius: 6px; overflow: hidden;
+    }
+    .content thead tr { background: #032d60; color: #ffffff; }
+    .content thead th {
+      padding: 9px 13px; text-align: left; font-size: 12px;
+      text-transform: uppercase; letter-spacing: 0.05em;
+    }
+    .content tbody tr:nth-child(even) { background: #f0f5ff; }
+    .content tbody td { padding: 8px 13px; border-bottom: 1px solid #e8edf5; vertical-align: top; }
+    .content tbody tr:last-child td { border-bottom: none; }
+
+    .doc-footer {
+      background: #032d60; color: #7db8f7; font-size: 12px;
+      text-align: center; padding: 14px 40px;
+    }
+
+    @media print {
+      @page { margin: 1in; size: letter; }
+      body { background: #ffffff; }
+      .page-wrapper { box-shadow: none; border-radius: 0; margin: 0; max-width: 100%; }
+      .doc-header, .content thead tr, .content blockquote { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+      .content h2, .content table { break-inside: avoid; page-break-inside: avoid; }
+      .doc-footer { background: none; color: #444444; border-top: 1px solid #d8e0ec; }
+    }
+  </style>
+</head>
+<body>
+<div class="page-wrapper">
+  <header class="doc-header">
+    <!-- Remove the next line entirely when the document is generated standalone (no home page). -->
+    <a href="{{HOME_HREF}}" style="position:fixed;top:14px;left:14px;z-index:9999;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;font-size:12px;font-weight:700;letter-spacing:0.04em;text-decoration:none;color:#fff;background:#0176d3;padding:7px 14px;border-radius:100px;box-shadow:0 2px 8px rgba(0,0,0,0.25);">&#8592; All artifacts</a>
+    <div class="partner-name">{{PARTNER_NAME}}</div>
+    <h1>{{DOC_LABEL}}</h1>
+    <div class="doc-meta">
+      <span>{{GENERATED_DATE}}</span>
+      <span class="stage-badge">{{OPPORTUNITY_STAGE}}</span>
+    </div>
+  </header>
+
+  <main class="content">
+{{CONTENT}}
+  </main>
+
+  <footer class="doc-footer">
+    Generated by pov-builder skill | {{GENERATED_DATE}}
+  </footer>
+</div>
+</body>
+</html>

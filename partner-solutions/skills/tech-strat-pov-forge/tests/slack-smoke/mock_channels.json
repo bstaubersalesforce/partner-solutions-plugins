@@ -1,0 +1,17 @@
+{
+  "_note": "FABRICATED test fixture. Not real Slack data. Simulates the channel list a Slack MCP list/search call would return for partner 'Particle Health' (slug particle-health) in workspace salesforce-org62. Used to exercise discovery ranking, the Low-drop, and the >6 Medium+High cap.",
+  "partner": "Particle Health",
+  "slug": "particle-health",
+  "channel_conventions": ["#partner-*", "#*-partnership", "#gp-*", "#isv-*"],
+  "channels": [
+    {"name": "#partner-particle-health", "topic": "Particle Health ISV deal room", "last_active_days": 1, "members": 14, "expected_tier": "High", "why": "partner name+slug in channel name + convention #partner-* + active"},
+    {"name": "#particle-health-partnership", "topic": "VBC partnership workstream", "last_active_days": 3, "members": 9, "expected_tier": "High", "why": "slug in name + convention #*-partnership + active"},
+    {"name": "#gp-particle-health", "topic": "GP engagement - Particle", "last_active_days": 6, "members": 7, "expected_tier": "High", "why": "slug in name + convention #gp-* + active"},
+    {"name": "#isv-particle", "topic": "Particle Health ISV tech", "last_active_days": 11, "members": 6, "expected_tier": "High", "why": "partner token in name + convention #isv-* + active"},
+    {"name": "#partner-health-data-platforms", "topic": "Health data ISV partners incl Particle Health", "last_active_days": 20, "members": 31, "expected_tier": "Medium", "why": "convention #partner-* + partner name in topic, not in channel name"},
+    {"name": "#particle-health-archive", "topic": "Old Particle threads", "last_active_days": 210, "members": 5, "expected_tier": "Medium", "why": "slug in name but dormant (>180d)"},
+    {"name": "#vbc-strategy", "topic": "Value-based care strategy; Particle mentioned", "last_active_days": 30, "members": 22, "expected_tier": "Medium", "why": "partner in topic only, no name/convention match"},
+    {"name": "#general-health-chatter", "topic": "random healthcare news", "last_active_days": 2, "members": 80, "expected_tier": "Low", "why": "keyword 'health' only, no partner/slug/convention - MUST be dropped"},
+    {"name": "#particles-physics-fun", "topic": "office physics club", "last_active_days": 4, "members": 40, "expected_tier": "Low", "why": "substring 'particle' false-positive, unrelated - MUST be dropped"}
+  ]
+}

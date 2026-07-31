@@ -1,0 +1,22 @@
+{
+  "name": "ncino-workshop",
+  "title": "nCino Banking Advisor Partner Workshop",
+  "mode": "engagement",
+  "partner_overlay": "nCino",
+  "duration": "1-day",
+  "surfaces": { "slack": true },
+  "provisioning": {
+    "needs_org": true,
+    "model": "assigned-preconfigured",
+    "required_features": ["nCino Managed Package", "Agentforce", "Hosted MCP (shared Worker)"]
+  },
+  "modules": [
+    { "n": 0, "title": "Comprehend the Banking Advisor Pattern" },
+    { "n": 1, "title": "Connect to the Shared MCP Backend", "checkpoint": true },
+    { "n": 2, "title": "Ground the Agent in nCino Data", "checkpoint": true },
+    { "n": 3, "title": "Extend the Agent" },
+    { "n": 4, "title": "Self-Service Org Rebuild", "optional": true }
+  ],
+  "content_dirs": {},
+  "reference_build": { "source": "freeform", "path": "sfdx/", "sample_data_path": "data/" }
+}

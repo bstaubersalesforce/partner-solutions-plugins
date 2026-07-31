@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>{{PARTNER_NAME}} — PoC Package</title>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: "Salesforce Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+      font-size: 15px; line-height: 1.6; color: #1a1a1a; background: #f4f6fb; }
+    .page-wrapper { max-width: 1000px; margin: 32px auto; background: #fff;
+      border-radius: 8px; box-shadow: 0 2px 16px rgba(3,45,96,0.10); overflow: hidden; }
+
+    .hero { background: #032d60; color: #fff; padding: 44px 48px 38px; }
+    .hero .eyebrow { font-size: 13px; font-weight: 600; text-transform: uppercase;
+      letter-spacing: 0.1em; color: #7db8f7; margin-bottom: 8px; }
+    .hero h1 { font-size: 30px; font-weight: 700; line-height: 1.15; margin-bottom: 18px; }
+    .hero-meta { display: flex; flex-wrap: wrap; gap: 22px; font-size: 13px; color: #cfe2fb; align-items: center; }
+
+    .grid-wrap { padding: 30px 48px 8px; }
+    .phase-title { font-size: 13px; font-weight: 700; text-transform: uppercase;
+      letter-spacing: 0.07em; color: #444444; margin: 22px 0 14px; display: flex; align-items: center; }
+    .phase-step { display: inline-flex; align-items: center; justify-content: center;
+      width: 22px; height: 22px; border-radius: 50%; background: #0176d3; color: #fff;
+      font-size: 11px; font-weight: 700; margin-right: 10px; }
+    .card-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 20px; }
+
+    .card { border: 1px solid #d8e0ec; border-radius: 8px; padding: 20px 20px 18px;
+      display: flex; flex-direction: column; background: #fff;
+      transition: box-shadow 0.15s ease, transform 0.15s ease; }
+    .card:hover { box-shadow: 0 4px 18px rgba(3,45,96,0.12); transform: translateY(-2px); }
+    .card-kind { align-self: flex-start; font-size: 10.5px; font-weight: 700;
+      text-transform: uppercase; letter-spacing: 0.07em; color: #0176d3;
+      background: #eaf2fd; padding: 3px 9px; border-radius: 10px; margin-bottom: 12px; }
+    .card-title { font-size: 16px; font-weight: 700; color: #032d60; margin-bottom: 7px; }
+    .card-desc { font-size: 13px; color: #444444; flex: 1; margin-bottom: 16px; }
+    .card-actions { display: flex; gap: 10px; flex-wrap: wrap; }
+    .btn { display: inline-block; font-size: 12.5px; font-weight: 700; text-decoration: none;
+      padding: 7px 14px; border-radius: 6px; letter-spacing: 0.02em; }
+    .btn-view { background: #0176d3; color: #fff; }
+    .btn-view:hover { background: #014486; }
+    .btn-md { background: #fff; color: #0176d3; border: 1px solid #0176d3; }
+    .btn-md:hover { background: #eaf2fd; }
+
+    .changelog { padding: 8px 48px 8px; }
+    .changelog h2 { font-size: 13px; font-weight: 700; text-transform: uppercase;
+      letter-spacing: 0.07em; color: #444444; margin-bottom: 10px; }
+    .footer { background: #032d60; color: #7db8f7; font-size: 12px;
+      text-align: center; padding: 16px 40px; margin-top: 26px; }
+
+    @media print {
+      @page { margin: 0.7in; size: letter; }
+      body { background: #fff; }
+      .page-wrapper { box-shadow: none; border-radius: 0; margin: 0; max-width: 100%; }
+      .hero, .card-kind, .phase-step { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+      .card { break-inside: avoid; }
+    }
+  </style>
+</head>
+<body>
+<div class="page-wrapper">
+
+  <header class="hero">
+    <div class="eyebrow">Partner Innovation Engineering · ISV Partner Solutions</div>
+    <h1>{{PARTNER_NAME}} — Proof-of-Concept Package</h1>
+    <div class="hero-meta">
+      <span>{{ARTIFACT_COUNT}} artifacts</span>
+      <span>Generated {{GENERATED_DATE}}</span>
+      <span>Build types: {{BUILD_TYPES}}</span>
+    </div>
+  </header>
+
+  <div class="grid-wrap">
+
+    <!-- Cards are ordered by the PIE engagement cycle: Align/Kickoff -> Scope/Build -> Deploy -> Review.
+         The "Markdown" button is omitted for any artifact rendered HTML-only; all listed here have both.
+         The 09 Agentscript card is removed at generation time when agentInScope is false.
+         The 13 Finalize Report card is removed unless a Phase-D finalize run produced it. -->
+
+    <div class="phase-title"><span class="phase-step">1</span>Align &amp; Kickoff</div>
+    <div class="card-grid">
+      <div class="card"><span class="card-kind">Deck</span>
+        <h3 class="card-title">PIE Engagement Kickoff Deck</h3>
+        <p class="card-desc">Slide-by-slide kickoff outline — partnership vision, primary use cases, team, expectations, and appendices (risks, timeline, readiness). Mirrors the official PIE Kickoff template.</p>
+        <div class="card-actions"><a class="btn btn-view" href="11-kickoff-deck.html">View ↗</a><a class="btn btn-md" href="11-kickoff-deck.md">Markdown ↓</a></div></div>
+      <div class="card"><span class="card-kind">Opinion</span>
+        <h3 class="card-title">MVP / PoC Opinion</h3>
+        <p class="card-desc">The recommended hero slice to prove the concept — what to build first, what to cut, what it proves, and the one trade-off worth a conversation.</p>
+        <div class="card-actions"><a class="btn btn-view" href="02-mvp-pov-opinion.html">View ↗</a><a class="btn btn-md" href="02-mvp-pov-opinion.md">Markdown ↓</a></div></div>
+      <div class="card"><span class="card-kind">Gaps</span>
+        <h3 class="card-title">Gaps Document</h3>
+        <p class="card-desc">Open questions, technical gaps, and unresolved architectural items — ingests the Technical &amp; Architectural Assessment when provided.</p>
+        <div class="card-actions"><a class="btn btn-view" href="07-gaps-document.html">View ↗</a><a class="btn btn-md" href="07-gaps-document.md">Markdown ↓</a></div></div>
+    </div>
+
+    <div class="phase-title"><span class="phase-step">2</span>Scope &amp; Build</div>
+    <div class="card-grid">
+      <div class="card"><span class="card-kind">Plan</span>
+        <h3 class="card-title">Execution Plan</h3>
+        <p class="card-desc">Narrative install/deploy sequence, install order, owners, and the task backlog that turns the build plan into work.</p>
+        <div class="card-actions"><a class="btn btn-view" href="01-execution-plan.html">View ↗</a><a class="btn btn-md" href="01-execution-plan.md">Markdown ↓</a></div></div>
+      <div class="card"><span class="card-kind">Inventory</span>
+        <h3 class="card-title">Component Manifest</h3>
+        <p class="card-desc">Human-readable inventory of every object, field, Apex class, LWC, and agent in the package — purpose and MVP-vs-deferred.</p>
+        <div class="card-actions"><a class="btn btn-view" href="08-component-manifest.html">View ↗</a><a class="btn btn-md" href="08-component-manifest.md">Markdown ↓</a></div></div>
+      <div class="card"><span class="card-kind">Packaging</span>
+        <h3 class="card-title">Packaging Analysis</h3>
+        <p class="card-desc">1GP vs 2GP recommendation plus a per-component metadata-coverage / unsupported-types check.</p>
+        <div class="card-actions"><a class="btn btn-view" href="04-package-analysis.html">View ↗</a><a class="btn btn-md" href="04-package-analysis.md">Markdown ↓</a></div></div>
+      <div class="card"><span class="card-kind">Agent</span>
+        <h3 class="card-title">Agentscript</h3>
+        <p class="card-desc">Review copy of the .agent document (agent builds only) — authored via agentforce-adlc; the deployable file lives in force-app/.</p>
+        <div class="card-actions"><a class="btn btn-view" href="09-agentscript.html">View ↗</a><a class="btn btn-md" href="09-agentscript.md">Markdown ↓</a></div></div>
+      <div class="card"><span class="card-kind">Dev Env</span>
+        <h3 class="card-title">Dev Environment</h3>
+        <p class="card-desc">Scratch org definition, org-template / snapshot decision, and a numbered developer quickstart from clean machine to working org.</p>
+        <div class="card-actions"><a class="btn btn-view" href="10-dev-environment.html">View ↗</a><a class="btn btn-md" href="10-dev-environment.md">Markdown ↓</a></div></div>
+    </div>
+
+    <div class="phase-title"><span class="phase-step">3</span>Deploy</div>
+    <div class="card-grid">
+      <div class="card"><span class="card-kind">Pre-Config</span>
+        <h3 class="card-title">Pre-Instance Config</h3>
+        <p class="card-desc">Licenses, features, permission sets, and remote sites that must exist in the target org before deploy.</p>
+        <div class="card-actions"><a class="btn btn-view" href="03-pre-instance-config.html">View ↗</a><a class="btn btn-md" href="03-pre-instance-config.md">Markdown ↓</a></div></div>
+      <div class="card"><span class="card-kind">Security</span>
+        <h3 class="card-title">Security Assessment</h3>
+        <p class="card-desc">Flagged findings — sharing, CRUD/FLS, secrets, OAuth scopes, PII-in-transit, Shield — with a Go / Conditional-Go / Not-ready verdict.</p>
+        <div class="card-actions"><a class="btn btn-view" href="06-security-review.html">View ↗</a><a class="btn btn-md" href="06-security-review.md">Markdown ↓</a></div></div>
+      <div class="card"><span class="card-kind">Post-Config</span>
+        <h3 class="card-title">Post-Config Steps</h3>
+        <p class="card-desc">Activation tasks after deploy — Named Credentials, Data 360 streams, agent activation, permission-set assignment.</p>
+        <div class="card-actions"><a class="btn btn-view" href="05-post-config-steps.html">View ↗</a><a class="btn btn-md" href="05-post-config-steps.md">Markdown ↓</a></div></div>
+    </div>
+
+    <div class="phase-title"><span class="phase-step">4</span>Review</div>
+    <div class="card-grid">
+      <div class="card"><span class="card-kind">Deck</span>
+        <h3 class="card-title">PIE Engagement Review Deck</h3>
+        <p class="card-desc">Slide-by-slide review/demo outline — value thesis, demo, proven outcomes, architecture &amp; moat, 30-60-90 plan, innovation signals.</p>
+        <div class="card-actions"><a class="btn btn-view" href="12-engagement-review-deck.html">View ↗</a><a class="btn btn-md" href="12-engagement-review-deck.md">Markdown ↓</a></div></div>
+      <div class="card"><span class="card-kind">Finalize</span>
+        <h3 class="card-title">Finalize Report</h3>
+        <p class="card-desc">Point-in-time record of the Phase-D org lifecycle (validate → deploy) against the target org — per-step results, returned IDs, and detailed mitigation for any failure. Present only after a finalize run.</p>
+        <div class="card-actions"><a class="btn btn-view" href="13-finalize-report.html">View ↗</a><a class="btn btn-md" href="13-finalize-report.md">Markdown ↓</a></div></div>
+    </div>
+
+  </div>
+
+  <div class="changelog"><h2>Changelog</h2>{{CHANGELOG}}</div>
+
+  <footer class="footer">Generated by pie-poc-forge skill · {{GENERATED_DATE}}</footer>
+
+</div>
+</body>
+</html>

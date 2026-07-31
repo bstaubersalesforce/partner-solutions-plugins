@@ -1,0 +1,51 @@
+{
+  "content_dirs": {
+    "slides": true
+  },
+  "duration": "1-day",
+  "mode": "lab",
+  "modules": [
+    {
+      "n": 0,
+      "title": "Comprehend"
+    },
+    {
+      "checkpoint": true,
+      "n": 1,
+      "title": "Model the Data"
+    },
+    {
+      "modes": [
+        "lab"
+      ],
+      "n": 5,
+      "title": "BYO Dataset"
+    },
+    {
+      "n": 6,
+      "optional": true,
+      "title": "Agent Grounding"
+    },
+    {
+      "modes": [
+        "engagement"
+      ],
+      "n": 7,
+      "title": "Engagement Deep Dive"
+    }
+  ],
+  "name": "rich-schema-kit",
+  "partner_overlay": "reference",
+  "provisioning": {
+    "model": "none",
+    "needs_org": false,
+    "required_features": []
+  },
+  "reference_build": {
+    "path": "sfdx/",
+    "sample_data_path": "data/",
+    "source": "freeform"
+  },
+  "surfaces": {},
+  "title": "Rich Schema Workshop"
+}

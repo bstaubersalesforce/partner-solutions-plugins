@@ -1,0 +1,24 @@
+{
+  "status": 0,
+  "result": {
+    "records": [
+      {
+        "attributes": {"type": "Product2"},
+        "Id": "01tXX00000000E1OEM",
+        "Name": "Health Cloud - Service - Enterprise Edition - OEM",
+        "ProductCode": "OPT-SS-EE-HLS-OEM-ASP",
+        "Family": "Custom Cloud"
+      },
+      {
+        "attributes": {"type": "Product2"},
+        "Id": "01tXX00000000U1OEM",
+        "Name": "Health Cloud - Service - Unlimited Edition - OEM",
+        "ProductCode": "OPT-SS-UE-HLS-OEM-ASP",
+        "Family": "Custom Cloud"
+      }
+    ],
+    "totalSize": 2,
+    "done": true
+  },
+  "warnings": []
+}

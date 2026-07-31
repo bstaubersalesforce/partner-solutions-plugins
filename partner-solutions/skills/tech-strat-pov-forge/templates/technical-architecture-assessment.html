@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>{{PARTNER_NAME}} — Technical &amp; Architectural Assessment</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: 'Salesforce Sans', 'Helvetica Neue', Arial, sans-serif;
+    background: #f4f6f9;
+    color: #032d60;
+    font-size: 14px;
+    line-height: 1.5;
+  }
+  .page { max-width: 980px; margin: 0 auto; padding: 32px 24px; }
+
+  /* ── Header ── */
+  .header {
+    background: #032d60;
+    color: white;
+    padding: 28px 32px;
+    border-radius: 8px;
+    margin-bottom: 24px;
+  }
+  .header h1 { font-size: 1.5rem; font-weight: 700; margin-bottom: 8px; }
+  .header .meta { display: flex; flex-wrap: wrap; gap: 20px; font-size: 0.8rem; opacity: 0.8; }
+  .header .meta span { white-space: nowrap; }
+  .header .meta span::before { content: attr(data-label) ': '; font-weight: 700; opacity: 1; }
+
+  /* ── Section card ── */
+  .section {
+    background: white;
+    border-radius: 8px;
+    padding: 24px;
+    margin-bottom: 20px;
+    border: 1px solid #e5e5e5;
+  }
+  .section-title {
+    font-size: 0.68rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: #444444;
+    margin-bottom: 18px;
+  }
+
+  /* ── Tables ── */
+  .styled-table {
+    width: 100%;
+    border-collapse: separate;
+    border-spacing: 0;
+    border: 1px solid #e5e5e5;
+    border-radius: 6px;
+    overflow: hidden;
+    font-size: 0.82rem;
+  }
+  .styled-table th {
+    background: #032d60;
+    color: white;
+    padding: 10px 12px;
+    text-align: left;
+    font-weight: 600;
+    font-size: 0.7rem;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+  }
+  .styled-table td {
+    padding: 10px 12px;
+    border-top: 1px solid #e8edf5;
+    vertical-align: top;
+  }
+  .styled-table tr:nth-child(even) td { background: #f8fafc; }
+
+  /* ── Confidence block ── */
+  .confidence-block {
+    background: #f0f5fc;
+    border-left: 3px solid #0176d3;
+    padding: 12px 16px;
+    border-radius: 0 6px 6px 0;
+    font-size: 0.82rem;
+    color: #444444;
+    margin-top: 14px;
+    line-height: 1.6;
+  }
+
+  /* ── Print ── */
+  @media print {
+    @page { margin: 1.5cm; size: A4 portrait; }
+    body { background: white; font-size: 12px; }
+    .section { break-inside: avoid; box-shadow: none; }
+    .header { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+  }
+
+  /* Well-Architected RAG grid */
+  .wa-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; }
+  .wa-pillar { border: 1px solid #e5e5e5; border-radius: 8px; padding: 14px; }
+  .wa-pillar h4 { font-size: 0.8rem; color: #0176d3; margin-bottom: 10px; }
+  .wa-quality { display: flex; align-items: center; gap: 8px; margin-bottom: 8px; font-size: 0.8rem; }
+  .rag { width: 12px; height: 12px; border-radius: 50%; flex: none; }
+  .rag-strong { background: #2e7d32; } .rag-emerging { background: #e65100; }
+  .rag-gap { background: #c62828; } .rag-na { background: #c9c9c9; }
+  /* Target-architecture layer cards */
+  .layer { border-left: 3px solid #0176d3; padding: 8px 14px; margin-bottom: 10px; background: #f8fafc; }
+  .layer .layer-name { font-weight: 700; font-size: 0.82rem; color: #032d60; }
+  /* Read-only stub blocks */
+  pre.stub { background: #1b1b2f; color: #e6e6f0; padding: 14px; border-radius: 6px;
+             overflow-x: auto; font-size: 0.78rem; line-height: 1.5;
+             font-family: 'Courier New', Courier, monospace; }
+  /* Mermaid architecture diagram */
+  .diagram-caption { font-size: 0.72rem; color: #444444; margin: 16px 0 6px;
+                     text-transform: uppercase; letter-spacing: 0.08em; font-weight: 700; }
+  pre.mermaid { background: #f8fafc; border: 1px solid #e5e5e5; border-radius: 6px;
+                padding: 16px; text-align: center; overflow-x: auto; }
+</style>
+</head>
+<body>
+<!-- Home-page back-link. Fill the HOME_HREF token in the anchor below with {SLUG}-index.html when part of a package; remove this entire <a> line for a standalone artifact (no home page). The token is intentionally not repeated in this comment so a plain string-replace fills only the anchor. -->
+<a href="{{HOME_HREF}}" style="position:fixed;top:14px;left:14px;z-index:9999;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;font-size:12px;font-weight:700;letter-spacing:0.04em;text-decoration:none;color:#fff;background:#0176d3;padding:7px 14px;border-radius:100px;box-shadow:0 2px 8px rgba(0,0,0,0.25);">&#8592; All artifacts</a>
+<div class="page">
+
+  <!-- ── Header ── -->
+  <div class="header">
+    <h1>{{PARTNER_NAME}} — Technical &amp; Architectural Assessment</h1>
+    <div class="meta">
+      <span data-label="Date">{{GENERATED_DATE}}</span>
+      <span data-label="Prepared by">{{PREPARED_BY}}</span>
+      <span data-label="Readiness">{{READINESS_SCORE}}</span>
+    </div>
+  </div>
+
+  <!-- ── Part 0: Executive Readiness Summary ── -->
+  <div class="section">
+    <div class="section-title">Part 0 — Executive Readiness Summary</div>
+    <div class="wa-grid">
+
+      <!-- Trusted pillar -->
+      <div class="wa-pillar">
+        <h4>Trusted</h4>
+        <div class="wa-quality">
+          <span class="rag {{WA_SECURE_RAG}}"></span>
+          <span>Secure — {{WA_SECURE_NOTE}}</span>
+        </div>
+        <div class="wa-quality">
+          <span class="rag {{WA_COMPLIANT_RAG}}"></span>
+          <span>Compliant — {{WA_COMPLIANT_NOTE}}</span>
+        </div>
+        <div class="wa-quality">
+          <span class="rag {{WA_RELIABLE_RAG}}"></span>
+          <span>Reliable — {{WA_RELIABLE_NOTE}}</span>
+        </div>
+      </div>
+
+      <!-- Easy pillar -->
+      <div class="wa-pillar">
+        <h4>Easy</h4>
+        <div class="wa-quality">
+          <span class="rag {{WA_INTENTIONAL_RAG}}"></span>
+          <span>Intentional — {{WA_INTENTIONAL_NOTE}}</span>
+        </div>
+        <div class="wa-quality">
+          <span class="rag {{WA_AUTOMATED_RAG}}"></span>
+          <span>Automated — {{WA_AUTOMATED_NOTE}}</span>
+        </div>
+        <div class="wa-quality">
+          <span class="rag {{WA_ENGAGING_RAG}}"></span>
+          <span>Engaging — {{WA_ENGAGING_NOTE}}</span>
+        </div>
+      </div>
+
+      <!-- Adaptable pillar -->
+      <div class="wa-pillar">
+        <h4>Adaptable</h4>
+        <div class="wa-quality">
+          <span class="rag {{WA_RESILIENT_RAG}}"></span>
+          <span>Resilient — {{WA_RESILIENT_NOTE}}</span>
+        </div>
+        <div class="wa-quality">
+          <span class="rag {{WA_COMPOSABLE_RAG}}"></span>
+          <span>Composable — {{WA_COMPOSABLE_NOTE}}</span>
+        </div>
+      </div>
+
+    </div><!-- /wa-grid -->
+    <div>{{TOP_RISKS_HTML}}</div>
+    <p><strong>Build-readiness verdict:</strong> {{BUILD_VERDICT}}</p>
+  </div>
+
+  <!-- ── Part 1: Current-State Assessment ── -->
+  <div class="section">
+    <div class="section-title">Part 1 — Current-State Assessment</div>
+    {{ASSESSMENT_HTML}}
+  </div>
+
+  <!-- ── Part 2: Target-State Architecture ── -->
+  <div class="section">
+    <div class="section-title">Part 2 — Target-State Architecture</div>
+    {{TARGET_ARCH_HTML}}
+    <div class="diagram-caption">Target-state architecture diagram</div>
+    <pre class="mermaid">{{ARCH_DIAGRAM_MERMAID}}</pre>
+  </div>
+
+  <!-- ── Part 3: Build-Ready Spec & Stubs ── -->
+  <div class="section">
+    <div class="section-title">Part 3 — Build-Ready Spec &amp; Stubs</div>
+    {{BLUEPRINT_HTML}}
+    <pre class="stub">{{STUBS_HTML}}</pre>
+  </div>
+
+  <!-- ── Part 4: Roadmap & Handoff ── -->
+  <div class="section">
+    <div class="section-title">Part 4 — Roadmap &amp; Handoff</div>
+    {{ROADMAP_HTML}}
+  </div>
+
+  <!-- ── Confidence & Assumptions ── -->
+  <div class="section">
+    <div class="section-title">Confidence &amp; Assumptions</div>
+    <div class="confidence-block">{{CONFIDENCE_HTML}}</div>
+  </div>
+
+</div><!-- /page -->
+<!-- Mermaid live render: renders every <pre class="mermaid"> block on load.
+     The diagram source (incl. its %%{init}%% theme directive) is injected into the
+     ARCH_DIAGRAM_MERMAID token at generation time — see refs/mermaid-diagrams.md.
+     Needs internet at view-time; the mmdc PNG/SVG export is the offline/deck path. -->
+<script type="module">
+  import mermaid from "https://cdn.jsdelivr.net/npm/mermaid@11/dist/mermaid.esm.min.mjs";
+  mermaid.initialize({ startOnLoad: true, securityLevel: "loose" });
+</script>
+</body>
+</html>
+<!-- =====================================================================
+     TOKEN REFERENCE — every token used in this template
+     (names WITHOUT braces so each literal token name appears once in the file;
+      a plain string-replace must not double-fill a glossary copy — see
+      refs/html-output-method.md)
+     =====================================================================
+     Header
+       PARTNER_NAME          — partner / company name
+       GENERATED_DATE        — document generation date (YYYY-MM-DD)
+       PREPARED_BY           — name and role of preparer
+       READINESS_SCORE       — overall build-readiness score or label
+
+     Part 0 — Well-Architected RAG ratings (one of: rag-strong / rag-emerging / rag-gap / rag-na)
+       WA_SECURE_RAG         — CSS class suffix for Secure dot
+       WA_SECURE_NOTE        — one-line finding for Secure
+       WA_COMPLIANT_RAG      — CSS class suffix for Compliant dot
+       WA_COMPLIANT_NOTE     — one-line finding for Compliant
+       WA_RELIABLE_RAG       — CSS class suffix for Reliable dot
+       WA_RELIABLE_NOTE      — one-line finding for Reliable
+       WA_INTENTIONAL_RAG    — CSS class suffix for Intentional dot
+       WA_INTENTIONAL_NOTE   — one-line finding for Intentional
+       WA_AUTOMATED_RAG      — CSS class suffix for Automated dot
+       WA_AUTOMATED_NOTE     — one-line finding for Automated
+       WA_ENGAGING_RAG       — CSS class suffix for Engaging dot
+       WA_ENGAGING_NOTE      — one-line finding for Engaging
+       WA_RESILIENT_RAG      — CSS class suffix for Resilient dot
+       WA_RESILIENT_NOTE     — one-line finding for Resilient
+       WA_COMPOSABLE_RAG     — CSS class suffix for Composable dot
+       WA_COMPOSABLE_NOTE    — one-line finding for Composable
+       TOP_RISKS_HTML        — top architectural risks (rendered HTML)
+       BUILD_VERDICT         — build-readiness verdict summary sentence
+
+     Part 1
+       ASSESSMENT_HTML       — current-state assessment across all WA qualities
+                                   (variable-length; rebuilt by fill script)
+
+     Part 2
+       TARGET_ARCH_HTML      — target-state architecture rendered as .layer cards
+                                   (variable-length; rebuilt by fill script)
+       ARCH_DIAGRAM_MERMAID  — Mermaid flowchart source for the target-state architecture
+                                   (theme directive + flowchart body; built per
+                                    refs/mermaid-diagrams.md, rendered live by the CDN)
+
+     Part 3
+       BLUEPRINT_HTML        — build-ready spec tables (components, APIs, data contracts)
+       STUBS_HTML            — read-only stub code blocks (variable-length)
+
+     Part 4
+       ROADMAP_HTML          — phased roadmap and handoff checklist (variable-length)
+
+     Confidence & Assumptions
+       CONFIDENCE_HTML       — confidence score, named assumptions, and open gaps
+     ===================================================================== -->

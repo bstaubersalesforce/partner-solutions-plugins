@@ -1,0 +1,51 @@
+# Full Multi-Surface Workshop — Credential Setup Cookbook
+
+The **highest-friction, highest-time-sink** part of an org-backed workshop is almost always credential setup —
+OAuth/connected-app config, tokens, permission grants. This cookbook isolates that setup into one gotcha-by-gotcha
+place, separate from the participant GUIDE, because credential failures are usually **silent** (a green status
+that doesn't prove function) and are the #1 cause of stalled teams.
+
+> **Author mode fills the topic-specific steps.** The structure below is topic-neutral; the concrete gotchas
+> (which toggle, which scope label, which permission set) are engagement-specific and must be captured from a real
+> setup run on the target org, then re-verified at the dry-run (labels drift by release).
+
+## Why a separate cookbook (not inline in the GUIDE)
+
+- Credential setup is a **one-time, high-friction gate** — inlining it bloats the teaching flow and buries the
+  gotchas. Pull it out; link to it from the GUIDE's setup checkpoint.
+- The failures are **silent**: OAuth "succeeds" (a 2xx / green dot) but the actual call fails later. The cookbook's
+  job is to make each silent-failure mode explicit with its **verification step**.
+
+## Setup steps (author mode: fill per surface/credential this kit needs)
+
+For each credential the kit requires (connected app / external client app, tokens, principal grants):
+
+1. **What to create** — the exact artifact + where in Setup.
+2. **The gotcha** — the non-obvious toggle/value that silently breaks it if wrong (capture the exact current-release
+   UI label — these drift).
+3. **The verify step** — the command or action that proves it *works*, not just that it saved. "Run X → expect Y;
+   if not, revisit step Z."
+
+## 🔴 Common silent-failure gotchas (seed list — confirm against the target org)
+
+- **Token-format / signing toggles** — an OAuth flow that appears to succeed but every call fails because a
+  required token-format option wasn't enabled. Verify with a real call, not the status dot.
+- **Scope labels drift** — the UI label for a scope changes release-to-release; the *label* you tell participants
+  to select may be stale. Confirm on the target org at the dry-run.
+- **"Require secret" / PKCE state** — confirm the required state (it may already be set, or the toggle may not
+  appear); don't instruct a blind flip.
+- **Run-As / integration-user LICENSE + permission** — the user the capability runs as needs both the right
+  **license** (not just API access) **and** the access permission set assigned. A bare integration user often
+  lacks the capability-use entitlement; the symptom is a late "access denied," not a setup error.
+- **Permission-set assignment** — assigned to the human but not the run-as/service user (or vice-versa) → silent
+  until the capability is invoked.
+
+## Checklist card (print / pin for the room)
+
+Author mode: distill the above into a one-glance checklist a facilitator can pin — each credential, its gotcha,
+and its verify step, in order. Keep it to the load-bearing 🔴 items.
+
+---
+
+*This cookbook covers credential **setup**. Org shape / provisioning model lives in `docs/org-provisioning.md`;
+per-surface build steps live in `GUIDE.md`; the running list of what's still unverified lives in `KNOWN-GAPS.md`.*

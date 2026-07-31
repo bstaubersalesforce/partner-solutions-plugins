@@ -1,0 +1,48 @@
+{
+  "name": "full-multi-surface-kit",
+  "title": "Full Multi-Surface Workshop",
+  "mode": "lab",
+  "duration": "2-day",
+  "partner_overlay": "reference",
+  "surfaces": {
+    "slack": true,
+    "web": true,
+    "mobile": false
+  },
+  "provisioning": {
+    "needs_org": true,
+    "model": "sdo",
+    "required_features": [
+      "Data Cloud",
+      "Agentforce",
+      "MCP"
+    ]
+  },
+  "modules": [
+    {
+      "n": 0,
+      "title": "Comprehend the Framework",
+      "checkpoint": false
+    },
+    {
+      "n": 1,
+      "title": "Build the Foundation",
+      "checkpoint": true
+    },
+    {
+      "n": 2,
+      "title": "Extend and Activate",
+      "checkpoint": false
+    }
+  ],
+  "content_dirs": {
+    "slides": true,
+    "commercial": true,
+    "showcase": true,
+    "prework": false
+  },
+  "reference_build": {
+    "source": "pie-poc-forge",
+    "path": "sfdx/"
+  }
+}
