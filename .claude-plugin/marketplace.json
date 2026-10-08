@@ -3,13 +3,13 @@
   "owner": {
     "name": "Brandon Stauber"
   },
-  "description": "Salesforce Partner Solutions deliverable-authoring skills — the *-forge family for partner engagements (POV, PoC, NPI, workshops, blocker diagnosis).",
+  "description": "Salesforce Partner Solutions deliverable-authoring skills — the *-forge family for partner engagements (POV, PoC, NPI, workshops, blocker diagnosis) plus the partner-account-tech-plan orchestrator that composes them.",
   "plugins": [
     {
       "name": "partner-solutions",
       "source": "./partner-solutions",
       "displayName": "Partner Solutions Forge",
-      "description": "Five Tier-3 skills that turn partner engagements into structured deliverables: tech-strat POV, PIE PoC package, PS NPI artifact family, workshop kits, and blocker diagnosis."
+      "description": "Six Tier-3 skills for partner engagements: five deliverable-forge tools (tech-strat POV, PIE PoC package, PS NPI artifact family, workshop kits, blocker diagnosis) + partner-account-tech-plan, the orchestrator that runs them as subagents into one living account tech plan."
     }
   ]
 }

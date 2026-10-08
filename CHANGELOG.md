@@ -4,6 +4,14 @@ One **suite version** across all five skills (in `partner-solutions/.claude-plug
 independent semvers. Bump on any material skill change that ships to the team; record the source commits in
 `VENDOR.md`.
 
+## 0.2.0 — 2026-10-08
+
+Adds the **partner-account-tech-plan** orchestrator (@eb36eb6) — a Tier-3 skill that runs the other five forge
+skills as subagents, adds a built-in Org62 case scan and a trust/relationship-posture overlay, and binds them into
+one living, V2MOM-framed Partner Account Tech Plan (Measures nested under Methods; Go-Forward gap-closure matrix;
+governance as influence-not-own). Dogfood-proven against Riskonnect. Bundling it with its five subagent skills
+means one install gives a teammate the orchestrator and everything it calls. Vendored copy re-validates 13/13.
+
 ## 0.1.0 — 2026-07-31
 
 Initial release. Marketplace + `partner-solutions` plugin carrying five Tier-3 *-forge deliverable skills,

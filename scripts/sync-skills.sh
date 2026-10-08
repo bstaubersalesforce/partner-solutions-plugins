@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# Re-vendor the 5 forge skills from their canonical repos in ~/.claude/skills into
+# Re-vendor the forge skills + orchestrator from their canonical repos in ~/.claude/skills into
 # this marketplace monorepo. The standalone repos remain where you DEVELOP; this
 # monorepo is the travelable distribution artifact the PS team installs.
 #
@@ -14,7 +14,7 @@ set -euo pipefail
 SRC="${SKILLS_SRC:-$HOME/.claude/skills}"
 HERE="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
 DEST="$HERE/partner-solutions/skills"
-SKILLS=(tech-strat-pov-forge pie-poc-forge ps-npi-forge workshop-forge partner-blocker-forge)
+SKILLS=(tech-strat-pov-forge pie-poc-forge ps-npi-forge workshop-forge partner-blocker-forge partner-account-tech-plan)
 
 for s in "${SKILLS[@]}"; do
   [ -d "$SRC/$s/.git" ] || { echo "ERROR: $SRC/$s is not a git repo"; exit 1; }

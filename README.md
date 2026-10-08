@@ -1,7 +1,8 @@
 # Partner Solutions Forge — Claude plugin + marketplace
 
-A travelable Claude Code **marketplace** carrying the five Tier-3 *-forge skills the Partner Solutions team uses to
-turn partner engagements into structured deliverables. Install once, get all five; update by re-pulling the repo.
+A travelable Claude Code **marketplace** carrying the six Tier-3 skills the Partner Solutions team uses to
+turn partner engagements into structured deliverables — five *-forge tools plus the partner-account-tech-plan
+orchestrator that composes them. Install once, get all six; update by re-pulling the repo.
 
 ## The skills
 
@@ -12,6 +13,7 @@ turn partner engagements into structured deliverables. Install once, get all fiv
 | **ps-npi-forge** | sources for a new Embedded/OEM product | the PS-owned NPI artifact family (15 artifacts + canvas + deck) |
 | **workshop-forge** | proven kit pattern + sources | a Salesforce partner workshop/lab kit (scaffold + author) |
 | **partner-blocker-forge** | a partner-reported technical blocker | a claimed-vs-real, evidence-based diagnosis + deliverable |
+| **partner-account-tech-plan** | a strategic ISV/OEM partner account | one living, V2MOM-framed account tech plan — orchestrates the five skills above as subagents + an Org62 case scan + a trust-posture overlay |
 
 ## Install (team members)
 
@@ -20,8 +22,9 @@ turn partner engagements into structured deliverables. Install once, get all fiv
 /plugin install partner-solutions
 ```
 
-Then invoke any skill by name (`/tech-strat-pov-forge`, `/pie-poc-forge`, …) — installing the plugin makes all
-five available; it does not change how you invoke them.
+Then invoke any skill by name (`/tech-strat-pov-forge`, `/pie-poc-forge`, `/partner-account-tech-plan`, …) —
+installing the plugin makes all six available; it does not change how you invoke them. Because
+`partner-account-tech-plan` runs the other five as subagents, installing the suite gives it everything it calls.
 
 ## Layout
 
@@ -29,8 +32,9 @@ five available; it does not change how you invoke them.
 .claude-plugin/marketplace.json     # the marketplace (one plugin: partner-solutions)
 partner-solutions/
   .claude-plugin/plugin.json        # the plugin (suite version + changelog live here)
-  skills/                           # the five skills, vendored as real content
+  skills/                           # the six skills, vendored as real content
     tech-strat-pov-forge/  pie-poc-forge/  ps-npi-forge/  workshop-forge/  partner-blocker-forge/
+    partner-account-tech-plan/
 scripts/sync-skills.sh              # re-vendor from the canonical skill repos
 ```
 
@@ -51,7 +55,7 @@ five independent semvers. Bump on any material skill change that ships to the te
 
 ## Not included (by design)
 
-Scope is the **five partner-deliverable forge tools**. Out of scope: post-install runners
+Scope is the **partner-deliverable forge family + its account-plan orchestrator**. Out of scope: post-install runners
 (`partner-package-post-install`, `sf-package-post-install`), `sf-flex-estimator`, `skill-forge`, and personal
 skills — different audiences; a separate plugin can carry those if the team wants them.
 
