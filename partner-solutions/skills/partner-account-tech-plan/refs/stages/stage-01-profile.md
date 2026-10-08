@@ -19,6 +19,16 @@ Build the partner picture an executive needs before any recommendation.
   current relationship threads and the ones to **activate** (target ≥3 active exec
   relationships before H1), with pairings.
 
+## Draw on external sources
+Generate the profile and stakeholder map first-hand from the external-source catalog in
+`../external-sources.md` — **LinkedIn** for exec titles/tenure/recent moves (the power map +
+key-person risk), **SEC 10-K/10-Q** for financials and the partner's own stated risks (public
+companies only — private/PE-owned → use funding/ownership instead), **press/newsroom** for
+traction and roadmap signals, **events** for the partnership-health read (cross-check Org62
+event opps) and exec-activation targeting, and **analyst/review + funding/ownership** sources.
+Honor the accuracy gate: confirm load-bearing facts from a primary source; AI-generated
+canvases/snippets are leads, not facts.
+
 ## Degrade gracefully
 Catalog and live pipeline are commonly unavailable — their absence is a flagged follow-up, not
 a blocker. Primary-source (partner site) blocks: use the fallback chain (about/news pages,

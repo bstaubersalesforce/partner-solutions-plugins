@@ -63,6 +63,7 @@ graceful degradation (when a subagent skill is unavailable) are in `refs/orchest
 - `refs/v2mom-frame.md` — the V2MOM top frame; **Measures are children of their Method**; `[proposed]` KPI tagging.
 - `refs/org62-case-scan.md` — reusable case-scan SOQL + deep-dive routing + the data-safety gate.
 - `refs/trust-posture.md` — elevation-not-encroachment overlay, stakeholder activation, Bullhorn/nCino lessons.
+- `refs/external-sources.md` — external research-source catalog (LinkedIn execs, SEC 10-K, press, events, analyst, funding) + what each feeds.
 - `refs/best-practice-frames.md` — Microsoft CAF + AWS Well-Architected mapping; periodic re-review (living plan).
 
 ## Output

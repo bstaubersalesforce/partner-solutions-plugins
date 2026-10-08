@@ -21,6 +21,13 @@ one exists. Carry the elevation posture (`../trust-posture.md`) into the positio
 Marketecture (St.14), MVP build plan (St.8), competitive assessment (St.19), POV/investor
 decks (St.17/10), solution infographic (St.11) — generate on request.
 
+## Ground the red team + commercial in external signal
+Pull competitive, financial, and roadmap signal from `../external-sources.md` — a public
+partner's **SEC 10-K risk factors** and **analyst/review** sources feed the Red Team (stated
+risks, named competitors, where customers are unhappy); **press/newsroom** flags roadmap-overlap
+direction; **funding/ownership** informs the commercial-model pressure test. Confirm load-bearing
+figures from a primary source.
+
 ## Hand-off
 Workstreams → V2MOM Methods (with nested Measures per `../v2mom-frame.md`). Red-team findings
 and readiness-scorecard reds → Obstacles + gap-closure rows (Stage 7). Consumption → the

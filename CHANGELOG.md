@@ -4,6 +4,13 @@ One **suite version** across all five skills (in `partner-solutions/.claude-plug
 independent semvers. Bump on any material skill change that ships to the team; record the source commits in
 `VENDOR.md`.
 
+## 0.2.1 — 2026-10-08
+
+Refreshes **partner-account-tech-plan** to @51013ac — adds `refs/external-sources.md`, a catalog of external
+research sources (LinkedIn execs → stakeholder power map, SEC 10-K risk factors, press/newsroom, events,
+analyst/review, funding/ownership) wired into the profile and red-team/commercial stages. Vendored copy
+re-validates 13/13.
+
 ## 0.2.0 — 2026-10-08
 
 Adds the **partner-account-tech-plan** orchestrator (@eb36eb6) — a Tier-3 skill that runs the other five forge
